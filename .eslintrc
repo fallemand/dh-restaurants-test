@@ -1,0 +1,14 @@
+{
+  "extends": ["airbnb"],
+  "parser": "babel-eslint",
+  "rules": {
+    "no-underscore-dangle": [2, {"allow": ["__PRELOADED_STATE__"]}],
+    "no-unused-vars": [1, {"argsIgnorePattern": "res|next|^err|reject", "ignoreRestSiblings": true}],
+    "react/forbid-prop-types": [0],
+    "camelcase": [1]
+  },
+  "globals": {
+    "window": false,
+    "document": false
+  }
+}

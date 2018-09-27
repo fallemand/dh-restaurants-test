@@ -1,0 +1,47 @@
+{
+  "name": "dh-restaurants-test",
+  "version": "1.0.0",
+  "description": "Search restaurants - test for delivery hero",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "NODE_ENV=production node ./index.js",
+    "start:dev": "NODE_ENV=development nodemon ./index.js",
+    "start:debug": "NODE_ENV=development nodemon --debug-frk ./index.js",
+    "start:e2e": "NODE_ENV=test node ./index.js",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "NODE_ENV=test jest",
+    "test:e2e": "nightwatch -a desktop -s wip --env xvfb_desktop && nightwatch -a mobile -s wip --env xvfb_mobile",
+    "test:e2e-setup": "selenium-standalone install --version=3.4.0 --drivers.chrome.version=2.40 --singleDriverInstall=chrome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fallemand/dh-restaurants-test.git"
+  },
+  "keywords": [
+    "node",
+    "react",
+    "express",
+    "delivery",
+    "hero"
+  ],
+  "author": "Facundo Allemand <fallemand@outlook.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fallemand/dh-restaurants-test/issues"
+  },
+  "homepage": "https://github.com/fallemand/dh-restaurants-test#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "nodemon": "^1.18.4"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
