@@ -1,13 +1,1 @@
-div {
-  background-color: black;
-  border-radius: 4px; }
-  div ::-webkit-input-placeholder {
-    color: gray; }
-  div ::-ms-input-placeholder {
-    color: gray; }
-  div ::placeholder {
-    color: gray; }
-
-body {
-  background-color: black; }
-
+div{background-color:#000;border-radius:4px}div ::-webkit-input-placeholder{color:grey}div ::-ms-input-placeholder{color:grey}div ::placeholder{color:grey}body{background-color:#000}

@@ -1,6 +1,8 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AutoPrefixer = require('autoprefixer');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './app/app.js',
@@ -39,5 +41,13 @@ module.exports = {
       filename: 'bundle.css',
     }),
   ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: { output: { comments: false } },
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+  },
   mode: 'production',
 };
