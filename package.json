@@ -9,7 +9,7 @@
     "start": "NODE_ENV=production node ./index.js",
     "start:dev": "NODE_ENV=development nodemon ./index.js",
     "start:debug": "NODE_ENV=development nodemon --debug-frk ./index.js",
-    "start:e2e": "NODE_ENV=test node ./index.js",
+    "start:test": "NODE_ENV=test node ./index.js",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "NODE_ENV=test jest",
     "test:e2e": "nightwatch -a desktop -s wip --env xvfb_desktop && nightwatch -a mobile -s wip --env xvfb_mobile",

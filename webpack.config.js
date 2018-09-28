@@ -1,7 +1,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './app/App.jsx',
+  entry: './app/app.js',
   output: {
     path: `${__dirname}/build`,
     publicPath: '/',
@@ -25,4 +25,5 @@ module.exports = {
       favicon: './app/assets/images/favicon.ico',
     }),
   ],
+  mode: 'production',
 };
