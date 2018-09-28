@@ -1,3 +1,8 @@
-body {
+div {
   background-color: black;
+  border-radius: 4px;
+
+  ::placeholder {
+    color: gray;
+  }
 }
