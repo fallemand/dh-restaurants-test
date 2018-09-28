@@ -2,7 +2,7 @@
   "name": "dh-restaurants-test",
   "version": "1.0.0",
   "description": "Search restaurants - test for delivery hero",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
@@ -34,6 +34,7 @@
   "homepage": "https://github.com/fallemand/dh-restaurants-test#readme",
   "devDependencies": {
     "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
