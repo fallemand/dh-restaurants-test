@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import Dropdown from '../../components/Dropdown';
 import Filter from '../../components/Filter';
 import RestaurantInfo from '../../components/RestaurantInfo';
@@ -22,10 +23,19 @@ class RestaurantsPage extends React.Component {
   componentDidMount() {
     fetch('/api/restaurants')
       .then(response => response.json())
-      .then(data => this.setState({
-        restaurants: data,
-        filteredRestaurants: data,
-      }));
+      .then((data) => {
+        this.setState({
+          restaurants: data,
+          filteredRestaurants: data,
+        });
+        const { sort, filter, value } = queryString.parse(this.props.location.search);
+        if (filter) {
+          this.onFilter({ field: filter, value });
+        }
+        if (sort) {
+          this.onSort(sort);
+        }
+      });
   }
 
   onSort(field) {
