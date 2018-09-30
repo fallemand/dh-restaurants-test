@@ -1,0 +1,25 @@
+.pagination {
+  display: inline-block;
+
+  .pagination__number {
+    color: #333;
+    font-weight: 300;
+    float: left;
+    font-size: 13px;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+
+    &.active {
+      background-color: #d61f26;
+      color: white;
+      border: 1px solid #d61f26;
+    }
+
+    &:hover:not(.active) {
+      background-color: #ddd;
+    }
+  }
+}

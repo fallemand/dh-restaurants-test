@@ -1,0 +1,46 @@
+.restaurant-items {
+  padding: 15px 25px;
+  background-color: #e2e2e2;
+
+  .restaurant-items__section {
+
+  }
+
+  .restaurant-items__section-title {
+    margin: 5px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .restaurant-items__section-items {
+    padding: 0;
+  }
+
+  .restaurant-items__section-item {
+    list-style-type: none;
+    margin: 15px 0;
+  }
+
+  .restaurant-items__item-name {
+    margin-right: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #333;
+  }
+
+  .restaurant-items__item-price {
+    margin-right: 20px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .restaurant-items__item-buy {
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: #e90016;
+    border-radius: 2px;
+  }
+}

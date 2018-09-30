@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 
 import SearchPage from './pages/search/SearchPage';
 import ItemPage from './pages/item/ItemPage';
+import './styles/_common.scss';
 
 render((
   <Router>

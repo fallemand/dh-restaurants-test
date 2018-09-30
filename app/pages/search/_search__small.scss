@@ -1,8 +1,15 @@
-div {
-  background-color: black;
-  border-radius: 4px;
+.search {
+  .search__logo-img {
+    height: 120px;
+    width: 220px;
+  }
 
-  ::placeholder {
-    color: gray;
+  .search__list-filters {
+    text-align: right;
+  }
+
+  .search__list-restaurants {
+    margin: 0;
+    padding: 5px;
   }
 }
