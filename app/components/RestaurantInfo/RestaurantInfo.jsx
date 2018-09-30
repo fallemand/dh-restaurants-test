@@ -3,8 +3,8 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import './restaurant-info.scss';
 
-const RestaurantInfo = ({ className, logo, title, rating, location, categories, clickable }) => (
-  <div className={classnames(className, 'restaurant-info', { 'restaurant-info--clickable': clickable })}>
+const RestaurantInfo = ({ className, logo, title, rating, location, categories, onClick }) => (
+  <div onClick={onClick} className={classnames(className, 'restaurant-info', { 'restaurant-info--clickable': onClick })}>
     <img className="restaurant-info__logo" src={logo} alt="Restaurant Logo" />
     <div className="restaurant-info__content">
       <h2 className="restaurant-info__title">{title}</h2>
@@ -20,7 +20,7 @@ const RestaurantInfo = ({ className, logo, title, rating, location, categories, 
 
 RestaurantInfo.propTypes = {
   className: PropTypes.string,
-  clickable: PropTypes.bool,
+  onClick: PropTypes.func,
   logo: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   rating: PropTypes.string.isRequired,
@@ -30,7 +30,7 @@ RestaurantInfo.propTypes = {
 
 RestaurantInfo.defaultProps = {
   className: null,
-  clikeable: false,
+  onClick: null,
 };
 
 export default RestaurantInfo;

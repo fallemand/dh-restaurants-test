@@ -11,7 +11,7 @@ const getRestaurant = (req, res) => {
   const jsonPath = path.join(__dirname, `./data/restaurants/${id}.json`);
   fs.readFile(jsonPath, 'utf8', (err, data) => {
     if (err) {
-      res.status(404).json({ message: 'Restaurant id not found '});
+      res.status(404).json({ message: 'Restaurant id not found ' });
     }
     res.set('Content-Type', 'application/json');
     res.send(data);
