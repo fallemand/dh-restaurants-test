@@ -10,7 +10,7 @@ const RestaurantInfo = ({ className, logo, title, rating, location, categories, 
       <h2 className="restaurant-info__title">{title}</h2>
       <span className="restaurant-info__rating">
         {rating}
-        <small>/10</small>
+        <small> /5</small>
       </span>
       <p className="restaurant-info__location">{location}</p>
       {categories.map(category => <span className="restaurant-info__category">{category}</span>)}

@@ -1,43 +1,38 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Dropdown from '../../components/Dropdown';
 import RestaurantInfo from '../../components/RestaurantInfo';
 import Pagination from '../../components/Pagination';
-import './search.scss';
-
 import logo from '../../assets/images/logo.png';
-import pizzaLogo from '../../assets/images/pizza-logo.png';
+import './restaurants.scss';
 
-const restaurantsEndpoint = '/api/restaurants';
-
-class SearchPage extends React.Component {
-
+class RestaurantsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       restaurants: [],
-      redirectId: null,
     };
   }
 
   componentDidMount() {
-    fetch(restaurantsEndpoint)
+    fetch('/api/restaurants')
       .then(response => response.json())
       .then(data => this.setState({
-        restaurants: data.data,
+        restaurants: data,
       }));
   }
 
   render() {
-    const { restaurants, redirectId } = this.state;
+    const { restaurants } = this.state;
+    const { history } = this.props;
     return (
-      <div className="search">
-        <a href="/" className="search__logo">
-          <img className="search__logo-img" src={logo} alt="Delivery Hero Logo" />
+      <div className="restaurants">
+        <a href="/" className="restaurants__logo">
+          <img className="restaurants__logo-img" src={logo} alt="Delivery Hero Logo" />
         </a>
-        <div className="search__list">
-          <div className="search__list-filters">
+        <div className="restaurants__list">
+          <div className="restaurants__list-filters">
             <Dropdown
               name="filter"
               title="Filter"
@@ -57,26 +52,27 @@ class SearchPage extends React.Component {
               ]}
             />
           </div>
-          <div className="search__list-restaurants">
+          <div className="restaurants__list-restaurants">
             { restaurants.map(restaurant => (
               <RestaurantInfo
-                onClick={() => (this.setState({ redirectId: restaurant.id }))}
-                logo={restaurant.general.logo_uri}
-                title={restaurant.general.name}
-                rating={restaurant.rating.average}
-                location={
-                  `${restaurant.address.street_name} ${restaurant.address.street_number} - ${restaurant.address.city}`
-                }
-                categories={restaurant.general.categories[0].split(',')}
+                onClick={() => (history.push(`/restaurants/${restaurant.id}`))}
+                logo={restaurant.logoUri}
+                title={restaurant.name}
+                rating={restaurant.rating}
+                location={restaurant.location}
+                categories={restaurant.categories}
               />
             ))}
           </div>
           <Pagination total={50} show={10} />
-          {redirectId && <Redirect to={`/items/${redirectId}`} />}
         </div>
       </div>
     );
   }
 }
 
-export default SearchPage;
+RestaurantsPage.propTypes = {
+  history: PropTypes.func.isRequired,
+};
+
+export default withRouter(RestaurantsPage);

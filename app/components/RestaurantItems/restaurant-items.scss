@@ -4,11 +4,7 @@
   padding: 15px 25px;
   background-color: $background-color-secondary;
 
-  .restaurant-items__section {
-
-  }
-
-  .restaurant-items__section-title {
+  .restaurant-items__section-name {
     margin: 5px 0;
     font-size: $font-size-16;
     font-weight: $font-bold;
@@ -29,12 +25,16 @@
     font-size: $font-size-14;
     font-weight: $font-light;
     color: $font-color-primary;
+    min-width: 150px;
+    display: inline-block;
   }
 
   .restaurant-items__item-price {
     margin-right: 20px;
     font-size: $font-size-14;
     color: $font-color-primary;
+    min-width: 100px;
+    display: inline-block;
   }
 
   .restaurant-items__item-buy {

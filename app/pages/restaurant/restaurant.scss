@@ -1,6 +1,6 @@
 @import '../../styles/variables';
-@import './search__small';
+@import './restaurant__small';
 
 @media ( min-width: $breakpoint-desktop ) {
-  @import './search__medium';
+  @import './restaurant__medium';
 }

@@ -1,16 +1,17 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { render } from 'react-dom';
 
-import SearchPage from './pages/search/SearchPage';
-import ItemPage from './pages/item/ItemPage';
+import RestaurantsPage from './pages/restaurants/RestaurantsPage';
+import RestaurantPage from './pages/restaurant/RestaurantPage';
 import './styles/_common.scss';
 
 render((
   <Router>
     <Switch>
-      <Route path="/search" component={SearchPage} />
-      <Route path="/items/:id" component={ItemPage} />
+      <Route path="/restaurants/:id" component={RestaurantPage} />
+      <Route exact path="/restaurants" component={RestaurantsPage} />
+      <Route exact path="/" render={() => <Redirect to="/restaurants" />} />
     </Switch>
   </Router>
 ), document.getElementById('root-app'));
