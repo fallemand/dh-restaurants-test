@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SearchItem from '../../components/RestaurantInfo';
 import RestaurantItems from '../../components/RestaurantItems';
-import './restaurant.scss';
+import './restaurant-detail.scss';
 
-class RestaurantPage extends React.Component {
+class RestaurantDetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,8 +38,8 @@ class RestaurantPage extends React.Component {
   }
 }
 
-RestaurantPage.propTypes = {
+RestaurantDetailPage.propTypes = {
   match: PropTypes.object.isRequired,
 };
 
-export default RestaurantPage;
+export default RestaurantDetailPage;
