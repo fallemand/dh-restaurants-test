@@ -1,6 +1,8 @@
+@import '../../styles/variables';
+
 .restaurant-items {
   padding: 15px 25px;
-  background-color: #e2e2e2;
+  background-color: $background-color-secondary;
 
   .restaurant-items__section {
 
@@ -8,9 +10,9 @@
 
   .restaurant-items__section-title {
     margin: 5px 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+    font-size: $font-size-16;
+    font-weight: $font-bold;
+    color: $font-color-primary;
   }
 
   .restaurant-items__section-items {
@@ -24,23 +26,23 @@
 
   .restaurant-items__item-name {
     margin-right: 20px;
-    font-size: 14px;
-    font-weight: 300;
-    color: #333;
+    font-size: $font-size-14;
+    font-weight: $font-light;
+    color: $font-color-primary;
   }
 
   .restaurant-items__item-price {
     margin-right: 20px;
-    font-size: 14px;
-    color: #333;
+    font-size: $font-size-14;
+    color: $font-color-primary;
   }
 
   .restaurant-items__item-buy {
     text-decoration: none;
-    color: #fff;
-    font-size: 12px;
+    color: $font-color-button;
+    font-size: $font-size-12;
     padding: 5px 10px;
-    background-color: #e90016;
+    background-color: $background-color-primary;
     border-radius: 2px;
   }
 }

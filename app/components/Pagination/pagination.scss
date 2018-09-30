@@ -1,25 +1,27 @@
+@import '../../styles/variables';
+
 .pagination {
   display: inline-block;
 
   .pagination__number {
-    color: #333;
-    font-weight: 300;
+    color: $font-color-primary;
+    font-weight: $font-light;
     float: left;
     font-size: 13px;
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color .3s;
-    border: 1px solid #ddd;
+    border: 1px solid $background-color-tertiary;
     margin: 0 4px;
 
     &.active {
-      background-color: #d61f26;
+      background-color: $background-color-primary;
       color: white;
-      border: 1px solid #d61f26;
+      border: 1px solid $background-color-primary;
     }
 
     &:hover:not(.active) {
-      background-color: #ddd;
+      background-color: $background-color-tertiary;
     }
   }
 }
