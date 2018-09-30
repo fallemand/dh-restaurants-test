@@ -35,7 +35,7 @@ const SearchPage = () => (
       </div>
       <div className="search__list-restaurants">
         <RestaurantInfo
-          clickeable
+          clickable
           logo={pizzaLogo}
           title="El Mono Loco Pizzas"
           rating="6.76"
@@ -43,7 +43,7 @@ const SearchPage = () => (
           categories={['Category A', 'Category B']}
         />
         <RestaurantInfo
-          clickeable
+          clickable
           logo={pizzaLogo}
           title="El Mono Loco Pizzas"
           rating="6.76"
@@ -51,7 +51,7 @@ const SearchPage = () => (
           categories={['Category A', 'Category B']}
         />
         <RestaurantInfo
-          clickeable
+          clickable
           logo={pizzaLogo}
           title="El Mono Loco Pizzas"
           rating="6.76"

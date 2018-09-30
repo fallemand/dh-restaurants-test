@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './restaurant-info.scss';
 
 const RestaurantInfo = ({ className, logo, title, rating, location, categories, clikeable }) => (
-  <div className={classnames(className, 'restaurant-info', { 'restaurant-info--clickeable': clikeable })}>
+  <div className={classnames(className, 'restaurant-info', { 'restaurant-info--clickable': clikeable })}>
     <img className="restaurant-info__logo" src={logo} alt="Restaurant Logo" />
     <div className="restaurant-info__content">
       <h2 className="restaurant-info__title">{title}</h2>
