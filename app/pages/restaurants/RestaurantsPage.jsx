@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Dropdown from '../../components/Dropdown';
+import Filter from '../../components/Filter';
 import RestaurantInfo from '../../components/RestaurantInfo';
 import Pagination from '../../components/Pagination';
 import logo from '../../assets/images/logo.png';
@@ -10,8 +11,11 @@ import './restaurants.scss';
 class RestaurantsPage extends React.Component {
   constructor(props) {
     super(props);
+    this.onFilter = this.onFilter.bind(this);
+    this.onSort = this.onSort.bind(this);
     this.state = {
       restaurants: [],
+      filteredRestaurants: [],
     };
   }
 
@@ -20,11 +24,31 @@ class RestaurantsPage extends React.Component {
       .then(response => response.json())
       .then(data => this.setState({
         restaurants: data,
+        filteredRestaurants: data,
       }));
   }
 
+  onSort(field) {
+    const filteredRestaurants = this.state.filteredRestaurants.sort(
+      (a, b) => a[field].toString().localeCompare(b[field].toString()),
+    );
+    this.setState({
+      filteredRestaurants,
+    });
+  }
+
+  onFilter(query) {
+    const { field, value } = query;
+    const filteredRestaurants = this.state.restaurants.filter(
+      restaurant => restaurant[field].toString().includes(value),
+    );
+    this.setState({
+      filteredRestaurants,
+    });
+  }
+
   render() {
-    const { restaurants } = this.state;
+    const { filteredRestaurants } = this.state;
     const { history } = this.props;
     return (
       <div className="restaurants">
@@ -34,26 +58,29 @@ class RestaurantsPage extends React.Component {
         <div className="restaurants__list">
           <div className="restaurants__list-filters">
             <Dropdown
-              name="filter"
-              title="Filter"
-              options={[
-                { value: 'value1', label: 'Value1' },
-                { value: 'value1', label: 'Value1' },
-                { value: 'value1', label: 'Value1' },
-              ]}
-            />
-            <Dropdown
               name="sort"
               title="Sort"
+              onChange={this.onSort}
               options={[
-                { value: 'value1', label: 'Value1' },
-                { value: 'value1', label: 'Value1' },
-                { value: 'value1', label: 'Value1' },
+                { value: 'name', label: 'Name' },
+                { value: 'rating', label: 'Rating' },
+                { value: 'location', label: 'Location' },
+                { value: 'categories', label: 'Categories' },
+              ]}
+            />
+            <Filter
+              className="restaurants__filter"
+              onFilter={this.onFilter}
+              fields={[
+                { value: 'name', label: 'Name' },
+                { value: 'rating', label: 'Rating' },
+                { value: 'location', label: 'Location' },
+                { value: 'categories', label: 'Categories' },
               ]}
             />
           </div>
           <div className="restaurants__list-restaurants">
-            { restaurants.map(restaurant => (
+            { filteredRestaurants.map(restaurant => (
               <RestaurantInfo
                 onClick={() => (history.push(`/restaurants/${restaurant.id}`))}
                 logo={restaurant.logoUri}
