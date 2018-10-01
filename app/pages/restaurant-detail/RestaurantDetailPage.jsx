@@ -53,4 +53,4 @@ RestaurantDetailPage.propTypes = {
   history: PropTypes.func.isRequired,
 };
 
-export default withRouter(RestaurantDetailPage);
+module.exports = withRouter(RestaurantDetailPage);

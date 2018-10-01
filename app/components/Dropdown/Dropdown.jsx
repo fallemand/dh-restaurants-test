@@ -23,6 +23,7 @@ class Dropdown extends React.Component {
         {
           options.map(option => (
             <option
+              key={option.value}
               value={option.value}
               disabled={option.disabled}
               selected={option.selected}
@@ -48,4 +49,4 @@ Dropdown.defaultProps = {
   title: null,
 };
 
-export default Dropdown;
+module.exports = Dropdown;

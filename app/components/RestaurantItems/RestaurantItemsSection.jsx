@@ -33,4 +33,4 @@ RestaurantItemsSection.defaultProps = {
   className: null,
 };
 
-export default RestaurantItemsSection;
+module.exports = RestaurantItemsSection;

@@ -10,6 +10,12 @@
   },
   "globals": {
     "window": false,
-    "document": false
+    "document": false,
+    "describe": false,
+    "shallow": false,
+    "it": false,
+    "expect": false,
+    "fetch": false,
+    "escapeSnapshot": false,
   }
 }

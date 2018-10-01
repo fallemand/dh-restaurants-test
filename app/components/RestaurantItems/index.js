@@ -1,3 +1,3 @@
 import RestaurantItems from './RestaurantItems';
 
-export default RestaurantItems;
+module.exports = RestaurantItems;

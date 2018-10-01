@@ -40,7 +40,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { className, fields, defaultValue } = this.props;
+    const { className, fields } = this.props;
     console.log(defaultValue);
     const { value } = this.state;
     return (
@@ -57,7 +57,6 @@ class Filter extends React.Component {
           placeholder="Filter Value"
           type="text"
           value={value}
-          defaultValue={defaultValue}
           onChange={this.handleQueryChange}
         />
       </form>
@@ -78,4 +77,4 @@ Filter.defaultProps = {
   className: null,
 };
 
-export default Filter;
+module.exports = Filter;

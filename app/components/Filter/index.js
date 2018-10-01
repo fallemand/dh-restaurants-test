@@ -1,3 +1,3 @@
 import Filter from './Filter';
 
-export default Filter;
+module.exports = Filter;

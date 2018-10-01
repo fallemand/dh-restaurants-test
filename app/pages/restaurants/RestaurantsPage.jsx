@@ -46,7 +46,9 @@ class RestaurantsPage extends React.Component {
 
   onFilter(query) {
     const { field, value } = query;
-    this.setQueryParams(query);
+    if (value) {
+      this.setQueryParams(query);
+    }
     const filteredRestaurants = this.state.restaurants.filter(
       restaurant => restaurant[field].toString().includes(value),
     );
@@ -133,4 +135,4 @@ RestaurantsPage.propTypes = {
   history: PropTypes.func.isRequired,
 };
 
-export default withRouter(RestaurantsPage);
+module.exports = withRouter(RestaurantsPage);

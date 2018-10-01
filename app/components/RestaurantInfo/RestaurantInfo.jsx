@@ -33,4 +33,4 @@ RestaurantInfo.defaultProps = {
   onClick: null,
 };
 
-export default RestaurantInfo;
+module.exports = RestaurantInfo;

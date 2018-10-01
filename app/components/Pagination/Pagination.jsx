@@ -26,4 +26,4 @@ Pagination.defaultProps = {
   className: null,
 };
 
-export default Pagination;
+module.exports = Pagination;

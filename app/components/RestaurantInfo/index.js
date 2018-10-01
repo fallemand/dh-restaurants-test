@@ -1,3 +1,3 @@
 import RestaurantInfo from './RestaurantInfo';
 
-export default RestaurantInfo;
+module.exports = RestaurantInfo;
