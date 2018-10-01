@@ -40,7 +40,8 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { className, fields } = this.props;
+    const { className, fields, defaultValue } = this.props;
+    console.log(defaultValue);
     const { value } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className={classnames(className, 'filter')}>
@@ -56,6 +57,7 @@ class Filter extends React.Component {
           placeholder="Filter Value"
           type="text"
           value={value}
+          defaultValue={defaultValue}
           onChange={this.handleQueryChange}
         />
       </form>
