@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter render component 1`] = `
+"<form onSubmit={[Function: bound handleSubmit]} className='filter'>
+  <Dropdown name='filter' title='Filter' className='filter__field' options={{...}} onChange={[Function: bound handleDropdownChange]} />
+  <input className='filter__value' placeholder='Filter Value' type='text' value='' onChange={[Function: bound handleQueryChange]} />
+</form>"
+`;
+
+exports[`Filter render with className 1`] = `
+"<form onSubmit={[Function: bound handleSubmit]} className='__CLASSNAME__ filter'>
+  <Dropdown name='filter' title='Filter' className='filter__field' options={{...}} onChange={[Function: bound handleDropdownChange]} />
+  <input className='filter__value' placeholder='Filter Value' type='text' value='' onChange={[Function: bound handleQueryChange]} />
+</form>"
+`;

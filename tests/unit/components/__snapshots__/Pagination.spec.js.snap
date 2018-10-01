@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination render component 1`] = `
+"<div className='__CLASSNAME__ pagination'>
+  <a className='pagination__number' href='#/'>
+    «
+  </a>
+  <a className='pagination__number' href='/#'>
+    0
+  </a>
+  <a className='pagination__number' href='/#'>
+    1
+  </a>
+  <a className='pagination__number' href='/#'>
+    2
+  </a>
+  <a className='pagination__number' href='/#'>
+    3
+  </a>
+  <a className='pagination__number' href='/#'>
+    4
+  </a>
+  <a className='pagination__number' href='/#'>
+    5
+  </a>
+  <a className='pagination__number' href='/#'>
+    6
+  </a>
+  <a className='pagination__number' href='/#'>
+    7
+  </a>
+  <a className='pagination__number' href='/#'>
+    8
+  </a>
+  <a className='pagination__number' href='/#'>
+    9
+  </a>
+  <a className='pagination__number' href='#/'>
+    »
+  </a>
+</div>"
+`;

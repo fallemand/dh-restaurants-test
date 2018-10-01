@@ -49,4 +49,4 @@ Dropdown.defaultProps = {
   title: null,
 };
 
-module.exports = Dropdown;
+export default Dropdown;

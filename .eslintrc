@@ -10,6 +10,7 @@
   },
   "globals": {
     "window": false,
+    "global": false,
     "document": false,
     "describe": false,
     "shallow": false,
@@ -17,5 +18,7 @@
     "expect": false,
     "fetch": false,
     "escapeSnapshot": false,
+    "jest": false,
+    "mount": false
   }
 }

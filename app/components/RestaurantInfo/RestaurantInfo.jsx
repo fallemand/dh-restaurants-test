@@ -13,7 +13,7 @@ const RestaurantInfo = ({ className, logo, title, rating, location, categories, 
         <small> /5</small>
       </span>
       <p className="restaurant-info__location">{location}</p>
-      {categories.map(category => <span className="restaurant-info__category">{category}</span>)}
+      {categories.map(category => <span key={category} className="restaurant-info__category">{category}</span>)}
     </div>
   </div>
 );
@@ -33,4 +33,4 @@ RestaurantInfo.defaultProps = {
   onClick: null,
 };
 
-module.exports = RestaurantInfo;
+export default RestaurantInfo;

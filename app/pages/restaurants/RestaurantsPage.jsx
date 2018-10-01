@@ -103,7 +103,6 @@ class RestaurantsPage extends React.Component {
             <Filter
               className="restaurants__filter"
               onFilter={this.onFilter}
-              defaultValue={value}
               fields={[
                 { value: 'name', label: 'Name', selected: (filter === 'name') },
                 { value: 'rating', label: 'Rating', selected: (filter === 'rating') },
@@ -115,6 +114,7 @@ class RestaurantsPage extends React.Component {
           <div className="restaurants__list-restaurants">
             { filteredRestaurants.map(restaurant => (
               <RestaurantInfo
+                key={restaurant.id}
                 onClick={() => (history.push(`/restaurants/${restaurant.id}`))}
                 logo={restaurant.logoUri}
                 title={restaurant.name}
@@ -132,7 +132,7 @@ class RestaurantsPage extends React.Component {
 }
 
 RestaurantsPage.propTypes = {
-  history: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
-module.exports = withRouter(RestaurantsPage);
+export default withRouter(RestaurantsPage);

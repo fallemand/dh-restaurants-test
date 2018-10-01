@@ -1,3 +1,3 @@
 import Pagination from './Pagination';
 
-module.exports = Pagination;
+export default Pagination;

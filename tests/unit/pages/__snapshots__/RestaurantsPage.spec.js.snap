@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RestaurantsPage render component 1`] = `
+"<div className='restaurants'>
+  <a href='/' className='restaurants__logo'>
+    <img className='restaurants__logo-img' src={{...}} alt='Delivery Hero Logo' />
+  </a>
+  <div className='restaurants__list'>
+    <div className='restaurants__list-filters'>
+      <Dropdown name='sort' title='Sort' onChange={[Function: bound onSort]} options={{...}} className={{...}} />
+      <Filter className='restaurants__filter' onFilter={[Function: bound onFilter]} fields={{...}} />
+    </div>
+    <div className='restaurants__list-restaurants'>
+      <RestaurantInfo onClick={[Function: onClick]} logo='__LOGOURI__' title='__TITLE__' rating='__RATING__' location='__LOCATION__' categories={{...}} className={{...}} />
+    </div>
+    <Pagination total={50} show={10} className={{...}} />
+  </div>
+</div>"
+`;

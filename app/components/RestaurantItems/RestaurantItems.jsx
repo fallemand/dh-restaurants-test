@@ -19,4 +19,4 @@ RestaurantItems.defaultProps = {
   className: null,
 };
 
-module.exports = RestaurantItems;
+export default RestaurantItems;

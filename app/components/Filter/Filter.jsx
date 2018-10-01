@@ -41,7 +41,6 @@ class Filter extends React.Component {
 
   render() {
     const { className, fields } = this.props;
-    console.log(defaultValue);
     const { value } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className={classnames(className, 'filter')}>
@@ -77,4 +76,4 @@ Filter.defaultProps = {
   className: null,
 };
 
-module.exports = Filter;
+export default Filter;

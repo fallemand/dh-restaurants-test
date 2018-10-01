@@ -9,12 +9,12 @@ const Pagination = ({ className, total, show }) => {
     <div className={classnames(className, 'pagination')}>
       <a className="pagination__number" href="#/">&laquo;</a>
       {Array.from(Array(pages), (x, i) => i).map(
-        pageNumber => <a className="pagination__number" href="/#">{pageNumber}</a>,
+        pageNumber => <a className="pagination__number" key={pageNumber} href="/#">{pageNumber}</a>,
       )}
       <a className="pagination__number" href="#/">&raquo;</a>
     </div>
   );
-}
+};
 
 Pagination.propTypes = {
   className: PropTypes.string,
@@ -26,4 +26,4 @@ Pagination.defaultProps = {
   className: null,
 };
 
-module.exports = Pagination;
+export default Pagination;

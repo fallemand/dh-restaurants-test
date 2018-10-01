@@ -8,9 +8,9 @@ const RestaurantItemsSection = ({ className, name, items }) => (
     <h2 className="restaurant-items__section-name">{name}</h2>
     <ul className="restaurant-items__section-items">
       {items.map(item => (
-        <li className="restaurant-items__section-item">
+        <li key={item.id} className="restaurant-items__section-item">
           <span className="restaurant-items__item-name">{item.name}</span>
-          <span className="restaurant-items__item-price">${item.price}</span>
+          <span className="restaurant-items__item-price">{`$${item.price}`}</span>
           <a href="#/" className="restaurant-items__item-buy">Add to cart</a>
         </li>
       ))}
@@ -24,7 +24,7 @@ RestaurantItemsSection.propTypes = {
   name: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
   })).isRequired,
 };
@@ -33,4 +33,4 @@ RestaurantItemsSection.defaultProps = {
   className: null,
 };
 
-module.exports = RestaurantItemsSection;
+export default RestaurantItemsSection;

@@ -9,11 +9,11 @@ class RestaurantDetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      info: {},
+      info: null,
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { id } = this.props.match.params;
     fetch(`/api/restaurants/${id}`)
       .then(response => response.json())
@@ -34,15 +34,15 @@ class RestaurantDetailPage extends React.Component {
         >
           &lt; Back
         </button>
-        {info.name && (<RestaurantInfo
+        {info && <RestaurantInfo
           className="restaurant-detail__info"
           logo={info.logoUri}
           title={info.name}
           rating={info.rating}
           location={info.location}
           categories={info.categories}
-        />)}
-        {info.name && <RestaurantItems sections={info.sections} />}
+        />}
+        {info && <RestaurantItems sections={info.sections} />}
       </div>
     );
   }
@@ -50,7 +50,7 @@ class RestaurantDetailPage extends React.Component {
 
 RestaurantDetailPage.propTypes = {
   match: PropTypes.object.isRequired,
-  history: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
-module.exports = withRouter(RestaurantDetailPage);
+export default withRouter(RestaurantDetailPage);
