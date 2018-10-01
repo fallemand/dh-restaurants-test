@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SearchItem from '../../components/RestaurantInfo';
+import { withRouter } from 'react-router-dom';
+import RestaurantInfo from '../../components/RestaurantInfo';
 import RestaurantItems from '../../components/RestaurantItems';
 import './restaurant-detail.scss';
 
@@ -23,15 +24,24 @@ class RestaurantDetailPage extends React.Component {
 
   render() {
     const { info } = this.state;
+    const { history } = this.props;
     return (
-      <div className="restaurant">
-        {info.name && <SearchItem
+      <div className="restaurant-detail">
+        <button
+          className="restaurant-detail__back"
+          type="button"
+          onClick={() => history.goBack()}
+        >
+          &lt; Back
+        </button>
+        {info.name && (<RestaurantInfo
+          className="restaurant-detail__info"
           logo={info.logoUri}
           title={info.name}
           rating={info.rating}
           location={info.location}
           categories={info.categories}
-        />}
+        />)}
         {info.name && <RestaurantItems sections={info.sections} />}
       </div>
     );
@@ -40,6 +50,7 @@ class RestaurantDetailPage extends React.Component {
 
 RestaurantDetailPage.propTypes = {
   match: PropTypes.object.isRequired,
+  history: PropTypes.func.isRequired,
 };
 
-export default RestaurantDetailPage;
+export default withRouter(RestaurantDetailPage);

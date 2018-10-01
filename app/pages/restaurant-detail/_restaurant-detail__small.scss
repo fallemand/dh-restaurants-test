@@ -1,0 +1,13 @@
+.restaurant-detail {
+  .restaurant-detail__back {
+    border: none;
+    border-radius: 2px;
+    padding: 5px 8px;
+    color: $font-color-primary;
+    background-color: $background-color-secondary;
+    cursor: pointer;
+  }
+  .restaurant-detail__info {
+    padding: 10px 0 15px;
+  }
+}
