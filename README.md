@@ -19,14 +19,11 @@ npm run start
 ```
 ---
 
----
 ### Develop
 ```
 npm run start:dev
 ```
----
 
----
 ### Run Tests
 ```
 npm run test
