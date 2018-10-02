@@ -11,7 +11,13 @@ const RestaurantItemsSection = ({ className, name, items }) => (
         <li key={item.id} className="restaurant-items__section-item">
           <span className="restaurant-items__item-name">{item.name}</span>
           <span className="restaurant-items__item-price">{`$${item.price}`}</span>
-          <a href="#/" className="restaurant-items__item-buy">Add to cart</a>
+          <button
+            type="button"
+            onClick={() => console.log(item)}
+            className="restaurant-items__item-buy"
+          >
+            Add to cart
+          </button>
         </li>
       ))}
 
