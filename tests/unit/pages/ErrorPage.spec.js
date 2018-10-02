@@ -9,14 +9,19 @@ describe('ErrorPage', () => {
 
   global.window = { location: { reload: jest.fn() } };
 
-  it('render component', () => {
+  it('render component without props', () => {
     const component = shallow(<ErrorPage />);
     expect(escapeSnapshot(component)).toMatchSnapshot();
   });
 
+  it('render component with props', () => {
+    const component = shallow(<ErrorPage title="__TITLE__" message="__MESSAGE__" buttonLabel="__BUTTON__" />);
+    expect(escapeSnapshot(component)).toMatchSnapshot();
+  });
+
   it('Button should redirect to Restaurants List', () => {
-    const component = shallow(<NotFoundPage {...props} />);
-    component.find('.not-found__button').simulate('click');
+    const component = shallow(<ErrorPage {...props} />);
+    component.find('.error__button').simulate('click');
     expect(global.window.location.reload).toHaveBeenCalled();
   });
 });

@@ -6,7 +6,7 @@ import { fetch } from 'whatwg-fetch';
  */
 const restaurantsList = () => (
   fetch('/api/restaurants', {
-    headers: { token: window.localStorage.getItem('token') },
+    headers: { token: window.sessionStorage.getItem('token') },
   })
     .then(response => response.json())
     .then(data => data)
@@ -19,7 +19,7 @@ const restaurantsList = () => (
  */
 const restaurantDetail = id => (
   fetch(`/api/restaurants/${id}`, {
-    headers: { token: window.localStorage.getItem('token') },
+    headers: { token: window.sessionStorage.getItem('token') },
   })
     .then(response => response.json())
     .then(data => data)

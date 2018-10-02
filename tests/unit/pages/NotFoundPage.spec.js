@@ -1,8 +1,6 @@
 import React from 'react';
 import NotFoundPage from '../../../app/pages/not-found/NotFoundPage';
 
-jest.mock('react-router-dom', () => ({ withRouter: Component => Component }));
-
 describe('NotFoundPage', () => {
   const props = {
     history: { push: jest.fn() },

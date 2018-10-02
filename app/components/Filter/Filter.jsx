@@ -60,7 +60,7 @@ Filter.propTypes = {
   className: PropTypes.string,
   onFilter: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  field: PropTypes.string.isRequired,
+  field: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -74,6 +74,7 @@ Filter.propTypes = {
 Filter.defaultProps = {
   className: null,
   value: '',
+  field: '',
 };
 
 export default Filter;

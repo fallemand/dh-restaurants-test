@@ -4,6 +4,8 @@ import Filter from '../../../app/components/Filter';
 describe('Filter', () => {
   const props = {
     onFilter: () => {},
+    onChange: () => {},
+    field: '__VAL1__',
     fields: [
       { value: '__VAL1__', label: '__LAB1__' },
       { value: '__VAL2__', label: '__LAB2__', selected: true },

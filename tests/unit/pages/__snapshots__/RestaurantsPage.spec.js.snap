@@ -7,8 +7,8 @@ exports[`RestaurantsPage render component 1`] = `
   </a>
   <div className='restaurants__list'>
     <div className='restaurants__list-actions'>
-      <Dropdown name='sort' title='Sort' className='restaurants__list-sort' onChange={[Function: bound onSort]} options={{...}} />
-      <Filter className='restaurants__list-filter' onFilter={[Function: bound onFilter]} fields={{...}} />
+      <Dropdown name='sort' title='Sort' value='' className='restaurants__list-sort' onChange={[Function: bound onSortChange]} options={{...}} />
+      <Filter className='restaurants__list-filter' field='' value='' onFilter={[Function: bound onFilterSubmit]} onChange={[Function: bound onFilterChange]} fields={{...}} />
     </div>
     <div className='restaurants__list-restaurants'>
       <RestaurantInfo onClick={[Function: onClick]} logo='__LOGOURI__' title='__TITLE__' rating='__RATING__' location='__LOCATION__' categories={{...}} className={{...}} />

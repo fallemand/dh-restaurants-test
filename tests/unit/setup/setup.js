@@ -7,3 +7,6 @@ global.shallow = Enzyme.shallow;
 global.render = Enzyme.render;
 global.mount = Enzyme.mount;
 global.escapeSnapshot = component => component.debug().replace(/"/g, '\'');
+
+// Mocks
+jest.mock('react-router-dom', () => ({ withRouter: Component => Component }));
