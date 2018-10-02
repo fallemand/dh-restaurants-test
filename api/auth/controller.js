@@ -1,7 +1,7 @@
 const authJson = require('./data/auth');
 
 const getToken = (req, res) => {
-  res.json(authJson);
+  res.status(200).json(authJson);
 };
 
 module.exports = {

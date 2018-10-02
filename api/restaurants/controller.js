@@ -4,7 +4,7 @@ const restaurantsJson = require('./data/restaurants');
 const { transformRestaurant, transformRestaurantsList } = require('./transform');
 
 const getRestaurantsList = (req, res) => {
-  res.json(transformRestaurantsList(restaurantsJson));
+  res.status(200).json(transformRestaurantsList(restaurantsJson));
 };
 
 const getRestaurant = (req, res) => {
@@ -13,9 +13,10 @@ const getRestaurant = (req, res) => {
   fs.readFile(jsonPath, 'utf8', (err, data) => {
     if (err) {
       res.status(404).json({ message: 'Restaurant id not found ' });
+      return;
     }
     res.set('Content-Type', 'application/json');
-    res.send(transformRestaurant(JSON.parse(data)));
+    res.status(200).send(transformRestaurant(JSON.parse(data)));
   });
 };
 
