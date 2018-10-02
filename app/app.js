@@ -18,7 +18,7 @@ import './styles/_common.scss';
 authService()
   .then((token) => {
     // Save token
-    window.localStorage.setItem('token', token);
+    window.sessionStorage.setItem('token', token);
 
     // Render SPA
     render((
