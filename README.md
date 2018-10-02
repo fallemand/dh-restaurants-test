@@ -20,6 +20,19 @@
 - Functional testing with Nightwatch
 - 404 page
 
+### Considerations
+In the restaurants list, there are some duplicated restaurants (same id and name).   
+I filter them in the Api and keep only the first one.  
+
+**Things I would love to do, but I couldn't for lack of time:**  
+- Handle errors in the API.
+- Handle incorrect Ids in the App.
+- Add Redux for state handling.  
+- Complete the pagination behavior.
+- Add ascending or descending sort.
+- Add more complex filters.
+- Generate different bundles in development (with sourcemaps, not minified, etc).
+
 ---
 ### Run Project
 `Node: v8.9.1`  
