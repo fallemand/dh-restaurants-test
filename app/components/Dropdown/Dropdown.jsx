@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import './dropdown.scss';
+import './_dropdown.scss';
 
 class Dropdown extends React.Component {
   constructor(props) {

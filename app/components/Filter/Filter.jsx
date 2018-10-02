@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import Dropdown from '../Dropdown';
-import './filter.scss';
+import './_filter.scss';
 
 class Filter extends React.Component {
   constructor(props) {

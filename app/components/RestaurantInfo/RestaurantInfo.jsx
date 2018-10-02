@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import './restaurant-info.scss';
+import './_restaurant-info.scss';
 
 const RestaurantInfo = ({
   className, logo, title, rating, location, categories, onClick,

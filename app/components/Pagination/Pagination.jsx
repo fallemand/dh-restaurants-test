@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import './pagination.scss';
+import './_pagination.scss';
 
 const Pagination = ({ className, total, show }) => {
   const pages = Math.ceil(total / show);

@@ -1,14 +1,16 @@
-.not-found {
+@import '../../styles/variables';
+
+.error {
   text-align: center;
 
-  .not-found__title {
+  .error__title {
     font-size: 100px;
     font-weight: $font-light;
     margin: 20px 0;
     color: $font-color-primary;
   }
 
-  .not-found__subtitle {
+  .error__subtitle {
     font-size: $font-size-20;
     font-weight: $font-light;
     margin: 20px 0;
@@ -16,7 +18,7 @@
     margin-bottom: 40px;
   }
 
-  .not-found__button {
+  .error__button {
     font-size: $font-size-16;
     color: $font-color-primary;
     background-color: $background-color-secondary;

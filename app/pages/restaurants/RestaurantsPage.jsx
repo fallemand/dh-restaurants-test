@@ -7,6 +7,7 @@ import Filter from '../../components/Filter';
 import RestaurantInfo from '../../components/RestaurantInfo';
 import Pagination from '../../components/Pagination';
 import logo from '../../assets/images/logo.png';
+import restaurantsService from '../../services/restaurants.service';
 import './restaurants.scss';
 
 class RestaurantsPage extends React.Component {
@@ -25,13 +26,11 @@ class RestaurantsPage extends React.Component {
     };
   }
 
-  componentDidMount() {
-    fetch('/api/restaurants')
-      .then(response => response.json())
-      .then((data) => {
-        this.restaurants = data;
-        this.loadFilteredAndSortedData();
-      });
+  componentWillMount() {
+    restaurantsService.restaurantsList().then((data) => {
+      this.restaurants = data;
+      this.loadFilteredAndSortedData();
+    });
   }
 
   onSortChange(field) {

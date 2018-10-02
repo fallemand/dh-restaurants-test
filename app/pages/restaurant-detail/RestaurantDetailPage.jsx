@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import RestaurantInfo from '../../components/RestaurantInfo';
 import RestaurantItems from '../../components/RestaurantItems';
+import restaurantsService from '../../services/restaurants.service';
 import './restaurant-detail.scss';
 
 class RestaurantDetailPage extends React.Component {
@@ -16,11 +17,11 @@ class RestaurantDetailPage extends React.Component {
   componentWillMount() {
     const { match } = this.props;
     const { id } = match.params;
-    fetch(`/api/restaurants/${id}`)
-      .then(response => response.json())
-      .then(data => this.setState({
+    restaurantsService.restaurantDetail(id).then((data) => {
+      this.setState({
         info: data,
-      }));
+      });
+    });
   }
 
   render() {

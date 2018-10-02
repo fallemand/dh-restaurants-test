@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import RestaurantItemsSection from './RestaurantItemsSection';
-import './restaurant-items.scss';
+import './_restaurant-items.scss';
 
 const RestaurantItems = ({ className, sections }) => (
   <div className={classnames(className, 'restaurant-items')}>

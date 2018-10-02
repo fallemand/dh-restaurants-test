@@ -7,7 +7,7 @@ const { transformRestaurant, transformRestaurantsList } = require('./transform')
  * In the restaurant json, there are several restaurants with same id and name.
  * We will keep only the first one from the list
  * @param {Array} restaurants
- * @returns {Array} unique restaurats
+ * @returns {Array} unique restaurants
  */
 const removeDuplicated = restaurants => (
   restaurants.filter((restaurant, index, self) => (
@@ -15,10 +15,22 @@ const removeDuplicated = restaurants => (
   ))
 );
 
+/**
+ * Get the restaurant list
+ * @param {Object} request
+ * @param {Object} response
+ * @returns {Array} restaurants
+ */
 const getRestaurantsList = (req, res) => {
   res.status(200).json(removeDuplicated(transformRestaurantsList(restaurantsJson)));
 };
 
+/**
+ * Get the restaurant list
+ * @param {Object} request
+ * @param {Object} response
+ * @returns {Object} restaurant info
+ */
 const getRestaurant = (req, res) => {
   const { id } = req.params;
   const jsonPath = path.join(__dirname, `./data/restaurants/${id}.json`);

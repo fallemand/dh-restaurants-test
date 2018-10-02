@@ -1,7 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import './restaurant-items.scss';
 
 const RestaurantItemsSection = ({ className, name, items }) => (
   <section className={classnames(className, 'restaurant-items__section')}>
@@ -20,7 +19,6 @@ const RestaurantItemsSection = ({ className, name, items }) => (
           </button>
         </li>
       ))}
-
     </ul>
   </section>
 );
