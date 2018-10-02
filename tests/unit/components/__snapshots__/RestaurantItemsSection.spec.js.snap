@@ -13,9 +13,9 @@ exports[`RestaurantItems render component 1`] = `
       <span className='restaurant-items__item-price'>
         $99.99
       </span>
-      <a href='#/' className='restaurant-items__item-buy'>
+      <button type='button' onClick={[Function: onClick]} className='restaurant-items__item-buy'>
         Add to cart
-      </a>
+      </button>
     </li>
     <li className='restaurant-items__section-item'>
       <span className='restaurant-items__item-name'>
@@ -24,9 +24,9 @@ exports[`RestaurantItems render component 1`] = `
       <span className='restaurant-items__item-price'>
         $99.99
       </span>
-      <a href='#/' className='restaurant-items__item-buy'>
+      <button type='button' onClick={[Function: onClick]} className='restaurant-items__item-buy'>
         Add to cart
-      </a>
+      </button>
     </li>
     <li className='restaurant-items__section-item'>
       <span className='restaurant-items__item-name'>
@@ -35,9 +35,9 @@ exports[`RestaurantItems render component 1`] = `
       <span className='restaurant-items__item-price'>
         $99.99
       </span>
-      <a href='#/' className='restaurant-items__item-buy'>
+      <button type='button' onClick={[Function: onClick]} className='restaurant-items__item-buy'>
         Add to cart
-      </a>
+      </button>
     </li>
   </ul>
 </section>"

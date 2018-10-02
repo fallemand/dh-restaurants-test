@@ -11,9 +11,9 @@ const restaurantsInfo = [{
   categories: ['__CAT1__', '__CAT2__'],
   className: '__CLASSNAME__',
 }];
-global.fetch = jest.fn().mockImplementation(() => (
+jest.mock('whatwg-fetch', (jest.fn().mockImplementation(() => (
   Promise.resolve({ json: () => Promise.resolve(restaurantsInfo) })
-));
+))));
 
 describe('RestaurantsPage', () => {
   const props = {

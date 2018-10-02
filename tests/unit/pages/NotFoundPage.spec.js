@@ -12,13 +12,5 @@ describe('NotFoundPage', () => {
   it('render component', () => {
     const component = shallow(<NotFoundPage {...props} />);
     expect(escapeSnapshot(component)).toMatchSnapshot();
-    component.find('.not-found__button').simulate('click');
-    expect(props.history.push).toHaveBeenCalledWith('/restaurants');
-  });
-
-  it('Button should redirect to Restaurants List', () => {
-    const component = shallow(<NotFoundPage {...props} />);
-    component.find('.not-found__button').simulate('click');
-    expect(props.history.push).toHaveBeenCalledWith('/restaurants');
   });
 });

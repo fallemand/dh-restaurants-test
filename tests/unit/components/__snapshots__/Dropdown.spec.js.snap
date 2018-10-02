@@ -5,13 +5,13 @@ exports[`Dropdown render component 1`] = `
   <option value='' disabled={true} selected={true}>
     __TITLE__
   </option>
-  <option value='__VAL1__' disabled={[undefined]} selected={[undefined]}>
+  <option value='__VAL1__' disabled={[undefined]} selected={false}>
     __LAB1__
   </option>
-  <option value='__VAL2__' disabled={[undefined]} selected={true}>
+  <option value='__VAL2__' disabled={[undefined]} selected={false}>
     __LAB2__
   </option>
-  <option value='__VAL1__' disabled={true} selected={[undefined]}>
+  <option value='__VAL1__' disabled={true} selected={false}>
     __LAB1__
   </option>
 </select>"
