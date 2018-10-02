@@ -4,6 +4,7 @@ const AutoPrefixer = require('autoprefixer');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 module.exports = {
   entry: './app/app.js',
@@ -53,6 +54,11 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'bundle.css',
+    }),
+    new ImageminPlugin({
+      pngquant: {
+        quality: '95-100',
+      },
     }),
   ],
   optimization: {
