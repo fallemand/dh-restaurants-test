@@ -10,44 +10,37 @@ class Filter extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.handleQueryChange = this.handleQueryChange.bind(this);
-    this.state = {
-      field: '',
-      value: '',
-    };
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const { field, value } = this.state;
-    const { onFilter } = this.props;
+    const { onFilter, field, value } = this.props;
     onFilter({
       field,
       value,
     });
   }
 
-  handleDropdownChange(value) {
-    this.setState({
-      field: value,
-    });
+  handleDropdownChange(query) {
+    const { onChange, value } = this.props;
+    onChange({ field: query, value });
   }
 
   handleQueryChange(event) {
     const { value } = event.target;
-    this.setState({
-      value,
-    });
+    const { onChange, field } = this.props;
+    onChange({ field, value });
   }
 
   render() {
-    const { className, fields } = this.props;
-    const { value } = this.state;
+    const { className, fields, field, value } = this.props;
     return (
       <form onSubmit={this.handleSubmit} className={classnames(className, 'filter')}>
         <Dropdown
           name="filter"
           title="Filter"
           className="filter__field"
+          value={field}
           options={fields}
           onChange={this.handleDropdownChange}
         />
@@ -66,6 +59,12 @@ class Filter extends React.Component {
 Filter.propTypes = {
   className: PropTypes.string,
   onFilter: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  field: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   fields: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
@@ -74,6 +73,7 @@ Filter.propTypes = {
 
 Filter.defaultProps = {
   className: null,
+  value: '',
 };
 
 export default Filter;

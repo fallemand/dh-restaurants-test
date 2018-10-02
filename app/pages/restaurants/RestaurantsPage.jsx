@@ -12,12 +12,15 @@ import './restaurants.scss';
 class RestaurantsPage extends React.Component {
   constructor(props) {
     super(props);
-    this.onFilter = this.onFilter.bind(this);
-    this.onSort = this.onSort.bind(this);
+    this.onSortChange = this.onSortChange.bind(this);
+    this.onFilterSubmit = this.onFilterSubmit.bind(this);
     this.setQueryParams = this.setQueryParams.bind(this);
-    this.handleUrlParams = this.handleUrlParams.bind(this);
+    this.onFilterChange = this.onFilterChange.bind(this);
+    this.sort = this.sort.bind(this);
+    this.filter = this.filter.bind(this);
+    this.loadFilteredAndSortedData = this.loadFilteredAndSortedData.bind(this);
+    this.restaurants = [];
     this.state = {
-      restaurants: [],
       filteredRestaurants: [],
     };
   }
@@ -26,37 +29,25 @@ class RestaurantsPage extends React.Component {
     fetch('/api/restaurants')
       .then(response => response.json())
       .then((data) => {
-        this.setState({
-          restaurants: data,
-          filteredRestaurants: data,
-        });
-        this.handleUrlParams();
+        this.restaurants = data;
+        this.loadFilteredAndSortedData();
       });
   }
 
-  onSort(field) {
+  onSortChange(field) {
     this.setQueryParams({ sort: field });
-    const { filteredRestaurants } = this.state;
-    const newFilteredRestaurants = filteredRestaurants.sort(
-      (a, b) => a[field].toString().localeCompare(b[field].toString()),
-    );
-    this.setState({
-      filteredRestaurants: newFilteredRestaurants,
-    });
+    this.sort(field);
   }
 
-  onFilter(query) {
+  onFilterSubmit(query) {
     const { field, value } = query;
-    if (value) {
-      this.setQueryParams(query);
-    }
-    const { restaurants } = this.state;
-    const filteredRestaurants = restaurants.filter(
-      restaurant => restaurant[field].toString().includes(value),
-    );
-    this.setState({
-      filteredRestaurants,
-    });
+    this.setQueryParams({ filter: field, value });
+    this.filter(field, value);
+  }
+
+  onFilterChange(data) {
+    const { field, value } = data;
+    this.setState({ filter: field, value });
   }
 
   setQueryParams(query) {
@@ -69,22 +60,51 @@ class RestaurantsPage extends React.Component {
     });
   }
 
-  handleUrlParams() {
+  filter(field, value) {
+    const filteredRestaurants = this.restaurants.filter(
+      restaurant => restaurant[field].toString().includes(value),
+    );
+    this.setState({
+      filteredRestaurants,
+    });
+  }
+
+  sort(field) {
+    const { filteredRestaurants } = this.state;
+    const newRestaurants = JSON.parse(JSON.stringify(filteredRestaurants));
+    newRestaurants.sort(
+      (a, b) => a[field].toString().localeCompare(b[field].toString()),
+    );
+    this.setState({
+      filteredRestaurants: newRestaurants,
+    });
+  }
+
+  loadFilteredAndSortedData() {
     const { location } = this.props;
     const { sort, filter, value } = queryString.parse(location.search);
-    if (filter) {
-      this.onFilter({ field: filter, value });
-      this.setState({ filter });
-    }
-    if (sort) {
-      this.onSort(sort);
-      this.setState({ sort });
+    if (filter && value) {
+      this.filter(filter, value);
+      this.setState({ filter, value });
+    } else {
+      this.setState({ filteredRestaurants: this.restaurants }, () => {
+        if (sort) {
+          this.sort(sort);
+          this.setState({ sort });
+        }
+      });
     }
   }
 
   render() {
-    const { filteredRestaurants, sort, filter } = this.state;
+    const { filteredRestaurants, sort, filter, value } = this.state;
     const { history } = this.props;
+    const sortAndFilterFields = [
+      { value: 'name', label: 'Name' },
+      { value: 'rating', label: 'Rating' },
+      { value: 'location', label: 'Location' },
+      { value: 'categories', label: 'Categories' },
+    ];
     return (
       <div className="restaurants">
         <a href="/" className="restaurants__logo">
@@ -95,24 +115,18 @@ class RestaurantsPage extends React.Component {
             <Dropdown
               name="sort"
               title="Sort"
+              value={sort}
               className="restaurants__list-sort"
-              onChange={this.onSort}
-              options={[
-                { value: 'name', label: 'Name', selected: (sort === 'name') },
-                { value: 'rating', label: 'Rating', selected: (sort === 'rating') },
-                { value: 'location', label: 'Location', selected: (sort === 'location') },
-                { value: 'categories', label: 'Categories', selected: (sort === 'categories') },
-              ]}
+              onChange={this.onSortChange}
+              options={sortAndFilterFields}
             />
             <Filter
               className="restaurants__list-filter"
-              onFilter={this.onFilter}
-              fields={[
-                { value: 'name', label: 'Name', selected: (filter === 'name') },
-                { value: 'rating', label: 'Rating', selected: (filter === 'rating') },
-                { value: 'location', label: 'Location', selected: (filter === 'location') },
-                { value: 'categories', label: 'Categories', selected: (filter === 'categories') },
-              ]}
+              field={filter}
+              value={value}
+              onFilter={this.onFilterSubmit}
+              onChange={this.onFilterChange}
+              fields={sortAndFilterFields}
             />
           </div>
           <div className="restaurants__list-restaurants">

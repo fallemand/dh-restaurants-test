@@ -17,18 +17,18 @@ class Dropdown extends React.Component {
 
   render() {
     const {
-      className, name, title, options,
+      className, name, title, options, value,
     } = this.props;
     return (
       <select className={classnames(className, 'dropdown')} name={name} onChange={this.handleChange}>
-        {title && <option value="" disabled selected>{title}</option>}
+        {title && <option value="" disabled selected={!value}>{title}</option>}
         {
           options.map(option => (
             <option
               key={option.value}
               value={option.value}
               disabled={option.disabled}
-              selected={option.selected}
+              selected={option.value === value}
             >
               {option.label}
             </option>
@@ -42,6 +42,10 @@ Dropdown.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   title: PropTypes.string,
   options: PropTypes.array.isRequired,
 };
@@ -49,6 +53,7 @@ Dropdown.propTypes = {
 Dropdown.defaultProps = {
   className: null,
   title: null,
+  value: '',
 };
 
 export default Dropdown;
