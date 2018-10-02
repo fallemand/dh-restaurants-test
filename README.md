@@ -54,7 +54,7 @@ npm run test
 ---
 
 ### Author
-Made from Córdoba, Argentina :D  
+Made from Córdoba, Argentina :smiley:  
 ```
 Facundo Allemand  
 fallemand@outlook.com
