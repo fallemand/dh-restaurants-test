@@ -2,8 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import Dropdown from '../../components/Dropdown';
 import Filter from '../../components/Filter';
+import Sort from '../../components/Sort';
 import RestaurantInfo from '../../components/RestaurantInfo';
 import Pagination from '../../components/Pagination';
 import logo from '../../assets/images/logo.png';
@@ -23,6 +23,7 @@ class RestaurantsPage extends React.Component {
     this.restaurants = [];
     this.state = {
       filteredRestaurants: [],
+      sortOrder: false,
     };
   }
 
@@ -33,15 +34,21 @@ class RestaurantsPage extends React.Component {
     });
   }
 
-  onSortChange(field) {
-    this.setQueryParams({ sort: field });
-    this.sort(field);
+  onSortChange(data) {
+    const { field, order } = data;
+    if (field) {
+      this.setState({ sort: field, sortOrder: order });
+      this.setQueryParams({ sort: field, sortOrder: order });
+      this.sort(field, order);
+    }
   }
 
   onFilterSubmit(query) {
     const { field, value } = query;
-    this.setQueryParams({ filter: field, value });
-    this.filter(field, value);
+    if (field) {
+      this.setQueryParams({ filter: field, value });
+      this.filter(field, value);
+    }
   }
 
   onFilterChange(data) {
@@ -68,12 +75,16 @@ class RestaurantsPage extends React.Component {
     });
   }
 
-  sort(field) {
+  sort(field, sortOrder) {
     const { filteredRestaurants } = this.state;
-    const newRestaurants = JSON.parse(JSON.stringify(filteredRestaurants));
-    newRestaurants.sort(
-      (a, b) => a[field].toString().localeCompare(b[field].toString()),
-    );
+    const newRestaurants = filteredRestaurants;
+    newRestaurants.sort((a, b) => {
+      let result = a[field].toString().localeCompare(b[field].toString());
+      if (sortOrder) {
+        result *= (-1);
+      }
+      return result;
+    });
     this.setState({
       filteredRestaurants: newRestaurants,
     });
@@ -81,22 +92,23 @@ class RestaurantsPage extends React.Component {
 
   loadFilteredAndSortedData() {
     const { location } = this.props;
-    const { sort, filter, value } = queryString.parse(location.search);
+    const { sort, sortOrder, filter, value } = queryString.parse(location.search);
     if (filter && value) {
       this.filter(filter, value);
       this.setState({ filter, value });
     } else {
       this.setState({ filteredRestaurants: this.restaurants }, () => {
         if (sort) {
-          this.sort(sort);
-          this.setState({ sort });
+          const parsedSortOrder = sortOrder === 'true';
+          this.sort(sort, parsedSortOrder);
+          this.setState({ sort, sortOrder: parsedSortOrder });
         }
       });
     }
   }
 
   render() {
-    const { filteredRestaurants, sort, filter, value } = this.state;
+    const { filteredRestaurants, sort, sortOrder, filter, value } = this.state;
     const { history } = this.props;
     const sortAndFilterFields = [
       { value: 'name', label: 'Name' },
@@ -111,13 +123,14 @@ class RestaurantsPage extends React.Component {
         </a>
         <div className="restaurants__list">
           <div className="restaurants__list-actions">
-            <Dropdown
+            <Sort
               name="sort"
               title="Sort"
-              value={sort}
+              field={sort}
+              order={sortOrder}
               className="restaurants__list-sort"
               onChange={this.onSortChange}
-              options={sortAndFilterFields}
+              fields={sortAndFilterFields}
             />
             <Filter
               className="restaurants__list-filter"

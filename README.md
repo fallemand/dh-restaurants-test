@@ -29,8 +29,6 @@ I filter them in the Api and keep only the first one.
 - Handle incorrect Ids in the App.
 - Add Redux for state handling.  
 - Complete the pagination behavior.
-- Add ascending or descending sort.
-- Add more complex filters.
 - Generate different bundles in development (with sourcemaps, not minified, etc).
 
 ---
