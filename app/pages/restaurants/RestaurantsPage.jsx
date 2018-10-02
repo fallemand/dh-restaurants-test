@@ -88,10 +88,11 @@ class RestaurantsPage extends React.Component {
           <img className="restaurants__logo-img" src={logo} alt="Delivery Hero Logo" />
         </a>
         <div className="restaurants__list">
-          <div className="restaurants__list-filters">
+          <div className="restaurants__list-actions">
             <Dropdown
               name="sort"
               title="Sort"
+              className="restaurants__list-sort"
               onChange={this.onSort}
               options={[
                 { value: 'name', label: 'Name', selected: (sort === 'name') },
@@ -101,7 +102,7 @@ class RestaurantsPage extends React.Component {
               ]}
             />
             <Filter
-              className="restaurants__filter"
+              className="restaurants__list-filter"
               onFilter={this.onFilter}
               fields={[
                 { value: 'name', label: 'Name', selected: (filter === 'name') },

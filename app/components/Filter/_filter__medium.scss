@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+
+.filter {
+  width: auto;
+
+  .filter__field {
+    margin-right: 2px;
+    width: auto;
+  }
+
+  .filter__value {
+    width: auto;
+    border-radius: 4px;
+    padding: 6px 10px;
+  }
+}

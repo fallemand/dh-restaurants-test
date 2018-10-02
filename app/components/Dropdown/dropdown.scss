@@ -1,6 +1,6 @@
-.dropdown {
-  height: 30px;
-  border-radius: 2px;
-  min-width: 150px;
-  margin: 0 10px;
+@import '../../styles/variables';
+@import './dropdown__small';
+
+@media ( min-width: $breakpoint-desktop ) {
+  @import './dropdown__medium';
 }

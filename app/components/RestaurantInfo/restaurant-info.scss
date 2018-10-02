@@ -1,61 +1,6 @@
 @import '../../styles/variables';
+@import './restaurant-info__small';
 
-.restaurant-info {
-  border-radius: 2px;
-  padding: 15px 20px;
-  margin: 15px 0;
-
-  &.restaurant-info--clickable {
-    background-color: $background-color-secondary;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    &:hover {
-      box-shadow: 0 0 3px $border-color-hover;
-      background-color: $background-color-hover;
-    }
-  }
-
-  .restaurant-info__logo {
-    display: inline-block;
-    width: 10%;
-  }
-
-  .restaurant-info__content {
-    display: inline-block;
-    width: 80%;
-    padding: 0 20px;
-    vertical-align: top;
-  }
-
-  .restaurant-info__title {
-    font-size: $font-size-18;
-    display: inline-block;
-    color: $font-color-primary;
-    margin: 0 20px 0 0;
-  }
-
-  .restaurant-info__rating {
-    font-size: 14px;
-    color: $font-color-secondary;
-
-    small {
-      color: $font-color-tertiary;
-      font-size: $font-size-12;
-    }
-  }
-
-  .restaurant-info__location {
-    font-size: $font-size-12;
-    color: $font-color-secondary;
-    margin: 5px 0 15px;
-  }
-
-  .restaurant-info__category {
-    border: 1px solid $border-color;
-    display: inline-block;
-    padding: 5px 20px;
-    font-size: $font-size-12;
-    margin-right: 15px;
-    color: $font-color-primary;
-  }
+@media ( min-width: $breakpoint-desktop ) {
+  @import './restaurant-info__medium';
 }

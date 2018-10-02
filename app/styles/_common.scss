@@ -12,10 +12,17 @@ body {
 }
 
 .container {
-  max-width: 1000px;
   margin: 50px auto;
   background-color: $background-color-layout;
-  padding: 30px;
-  border-radius: 4px;
-  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.6);
+  padding: 20px 10px;
+  border-radius: 2px;
+}
+
+@media ( min-width: $breakpoint-desktop ) {
+  .container {
+    max-width: 1000px;
+    padding: 30px;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+  }
 }

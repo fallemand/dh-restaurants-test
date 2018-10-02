@@ -1,13 +1,7 @@
 @import '../../styles/variables';
+@import './filter__small';
 
-.filter {
-  .filter__field {
-    margin-right: 2px;
-  }
-
-  .filter__value {
-    border-radius: 4px;
-    border: 1px solid $border-color;
-    padding: 8px 10px;
-  }
+@media ( min-width: $breakpoint-desktop ) {
+  @import './filter__medium';
 }
+
