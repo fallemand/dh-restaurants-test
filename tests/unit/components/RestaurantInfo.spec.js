@@ -10,6 +10,7 @@ describe('RestaurantInfo', () => {
     categories: ['__CAT1__', '__CAT2__'],
     className: '__CLASSNAME__',
   };
+
   it('render component', () => {
     const component = shallow(<RestaurantInfo {...props} />);
     expect(escapeSnapshot(component)).toMatchSnapshot();

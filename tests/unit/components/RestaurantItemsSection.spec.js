@@ -11,6 +11,7 @@ describe('RestaurantItems', () => {
       { name: '__ITEMNAME3__', price: 99.99, id: 3 },
     ],
   };
+
   it('render component', () => {
     const component = shallow(<RestaurantItemsSection {...props} />);
     expect(escapeSnapshot(component)).toMatchSnapshot();

@@ -16,12 +16,14 @@ exports[`RestaurantInfo render clickeable component 1`] = `
     <p className='restaurant-info__location'>
       __LOCATION__
     </p>
-    <span className='restaurant-info__category'>
-      __CAT1__
-    </span>
-    <span className='restaurant-info__category'>
-      __CAT2__
-    </span>
+    <div className='restaurant-info__categories'>
+      <span className='restaurant-info__category'>
+        __CAT1__
+      </span>
+      <span className='restaurant-info__category'>
+        __CAT2__
+      </span>
+    </div>
   </div>
 </div>"
 `;
@@ -42,12 +44,14 @@ exports[`RestaurantInfo render component 1`] = `
     <p className='restaurant-info__location'>
       __LOCATION__
     </p>
-    <span className='restaurant-info__category'>
-      __CAT1__
-    </span>
-    <span className='restaurant-info__category'>
-      __CAT2__
-    </span>
+    <div className='restaurant-info__categories'>
+      <span className='restaurant-info__category'>
+        __CAT1__
+      </span>
+      <span className='restaurant-info__category'>
+        __CAT2__
+      </span>
+    </div>
   </div>
 </div>"
 `;

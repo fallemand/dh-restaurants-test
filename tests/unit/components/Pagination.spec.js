@@ -7,6 +7,7 @@ describe('Pagination', () => {
     show: 5,
     className: '__CLASSNAME__',
   };
+
   it('render component', () => {
     const component = shallow(<Pagination {...props} />);
     expect(escapeSnapshot(component)).toMatchSnapshot();

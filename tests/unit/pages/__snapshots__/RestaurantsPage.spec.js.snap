@@ -6,9 +6,9 @@ exports[`RestaurantsPage render component 1`] = `
     <img className='restaurants__logo-img' src={{...}} alt='Delivery Hero Logo' />
   </a>
   <div className='restaurants__list'>
-    <div className='restaurants__list-filters'>
-      <Dropdown name='sort' title='Sort' onChange={[Function: bound onSort]} options={{...}} className={{...}} />
-      <Filter className='restaurants__filter' onFilter={[Function: bound onFilter]} fields={{...}} />
+    <div className='restaurants__list-actions'>
+      <Dropdown name='sort' title='Sort' className='restaurants__list-sort' onChange={[Function: bound onSort]} options={{...}} />
+      <Filter className='restaurants__list-filter' onFilter={[Function: bound onFilter]} fields={{...}} />
     </div>
     <div className='restaurants__list-restaurants'>
       <RestaurantInfo onClick={[Function: onClick]} logo='__LOGOURI__' title='__TITLE__' rating='__RATING__' location='__LOCATION__' categories={{...}} className={{...}} />

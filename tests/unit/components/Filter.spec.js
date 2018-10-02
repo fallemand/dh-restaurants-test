@@ -10,6 +10,7 @@ describe('Filter', () => {
       { value: '__VAL1__', label: '__LAB1__', disabled: true },
     ],
   };
+
   it('render component', () => {
     const component = shallow(<Filter {...props} />);
     expect(escapeSnapshot(component)).toMatchSnapshot();

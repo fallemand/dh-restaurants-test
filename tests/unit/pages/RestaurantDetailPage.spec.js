@@ -12,16 +12,26 @@ const restaurantInfo = {
   sections: [],
   className: '__CLASSNAME__',
 };
-global.fetch = jest.fn().mockImplementation(() => Promise.resolve({ json: () => Promise.resolve(restaurantInfo) }));
+
+global.fetch = jest.fn().mockImplementation(() => (
+  Promise.resolve({ json: () => Promise.resolve(restaurantInfo) })
+));
 
 describe('RestaurantsPage', () => {
   const props = {
-    history: { push: jest.fn() },
+    history: { goBack: jest.fn() },
     match: { params: { id: 1 } },
   };
+
   it('render component', () => {
     const component = shallow(<RestaurantDetailPage {...props} />);
     component.setState({ info: restaurantInfo });
     expect(escapeSnapshot(component)).toMatchSnapshot();
+  });
+
+  it('Button should go back', () => {
+    const component = shallow(<RestaurantDetailPage {...props} />);
+    component.find('.restaurant-detail__back').simulate('click');
+    expect(props.history.goBack).toHaveBeenCalled();
   });
 });

@@ -11,18 +11,30 @@ const restaurantsInfo = [{
   categories: ['__CAT1__', '__CAT2__'],
   className: '__CLASSNAME__',
 }];
-global.fetch = jest.fn().mockImplementation(() => Promise.resolve({ json: () => Promise.resolve(restaurantsInfo) }));
+global.fetch = jest.fn().mockImplementation(() => (
+  Promise.resolve({ json: () => Promise.resolve(restaurantsInfo) })
+));
 
 describe('RestaurantsPage', () => {
   const props = {
     history: { push: jest.fn() },
     location: { search: '' },
   };
+
   it('render component', () => {
     const component = shallow(<RestaurantsPage {...props} />);
     component.setState({
       filteredRestaurants: restaurantsInfo,
     });
     expect(escapeSnapshot(component)).toMatchSnapshot();
+  });
+
+  it('click on restaurant should redirect to restaurant page', () => {
+    const component = shallow(<RestaurantsPage {...props} />);
+    component.setState({
+      filteredRestaurants: restaurantsInfo,
+    });
+    component.find('.restaurants__list-restaurants :first-child').simulate('click');
+    expect(props.history.push).toHaveBeenCalledWith('/restaurants/1');
   });
 });
