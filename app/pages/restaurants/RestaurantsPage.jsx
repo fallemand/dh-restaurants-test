@@ -36,11 +36,12 @@ class RestaurantsPage extends React.Component {
 
   onSort(field) {
     this.setQueryParams({ sort: field });
-    const filteredRestaurants = this.state.filteredRestaurants.sort(
+    const { filteredRestaurants } = this.state;
+    const newFilteredRestaurants = filteredRestaurants.sort(
       (a, b) => a[field].toString().localeCompare(b[field].toString()),
     );
     this.setState({
-      filteredRestaurants,
+      filteredRestaurants: newFilteredRestaurants,
     });
   }
 
@@ -49,7 +50,8 @@ class RestaurantsPage extends React.Component {
     if (value) {
       this.setQueryParams(query);
     }
-    const filteredRestaurants = this.state.restaurants.filter(
+    const { restaurants } = this.state;
+    const filteredRestaurants = restaurants.filter(
       restaurant => restaurant[field].toString().includes(value),
     );
     this.setState({
@@ -68,10 +70,11 @@ class RestaurantsPage extends React.Component {
   }
 
   handleUrlParams() {
-    const { sort, filter, value } = queryString.parse(this.props.location.search);
+    const { location } = this.props;
+    const { sort, filter, value } = queryString.parse(location.search);
     if (filter) {
       this.onFilter({ field: filter, value });
-      this.setState({ filter, value });
+      this.setState({ filter });
     }
     if (sort) {
       this.onSort(sort);
@@ -80,7 +83,7 @@ class RestaurantsPage extends React.Component {
   }
 
   render() {
-    const { filteredRestaurants, sort, filter, value } = this.state;
+    const { filteredRestaurants, sort, filter } = this.state;
     const { history } = this.props;
     return (
       <div className="restaurants">
@@ -134,6 +137,7 @@ class RestaurantsPage extends React.Component {
 
 RestaurantsPage.propTypes = {
   history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 export default withRouter(RestaurantsPage);

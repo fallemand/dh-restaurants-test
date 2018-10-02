@@ -3,7 +3,9 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import './restaurant-info.scss';
 
-const RestaurantInfo = ({ className, logo, title, rating, location, categories, onClick }) => (
+const RestaurantInfo = ({
+  className, logo, title, rating, location, categories, onClick,
+}) => (
   <div onClick={onClick} className={classnames(className, 'restaurant-info', { 'restaurant-info--clickable': onClick })}>
     <img className="restaurant-info__logo" src={logo} alt="Restaurant Logo" />
     <div className="restaurant-info__content">

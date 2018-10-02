@@ -14,7 +14,8 @@ class RestaurantDetailPage extends React.Component {
   }
 
   componentWillMount() {
-    const { id } = this.props.match.params;
+    const { match } = this.props;
+    const { id } = match.params;
     fetch(`/api/restaurants/${id}`)
       .then(response => response.json())
       .then(data => this.setState({
@@ -34,14 +35,17 @@ class RestaurantDetailPage extends React.Component {
         >
           &lt; Back
         </button>
-        {info && <RestaurantInfo
-          className="restaurant-detail__info"
-          logo={info.logoUri}
-          title={info.name}
-          rating={info.rating}
-          location={info.location}
-          categories={info.categories}
-        />}
+
+        {info && (
+          <RestaurantInfo
+            className="restaurant-detail__info"
+            logo={info.logoUri}
+            title={info.name}
+            rating={info.rating}
+            location={info.location}
+            categories={info.categories}
+          />
+        )}
         {info && <RestaurantItems sections={info.sections} />}
       </div>
     );

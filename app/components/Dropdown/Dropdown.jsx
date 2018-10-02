@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import './dropdown.scss';
 
 class Dropdown extends React.Component {
-
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -12,11 +11,14 @@ class Dropdown extends React.Component {
 
   handleChange(event) {
     const { value } = event.target;
-    this.props.onChange(value);
+    const { onChange } = this.props;
+    onChange(value);
   }
 
   render() {
-    const { className, name, title, options } = this.props;
+    const {
+      className, name, title, options,
+    } = this.props;
     return (
       <select className={classnames(className, 'dropdown')} name={name} onChange={this.handleChange}>
         {title && <option value="" disabled selected>{title}</option>}

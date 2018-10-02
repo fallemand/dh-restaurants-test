@@ -14,6 +14,7 @@
 - Bundle JS - CSS (Transpile ES6 and JSX to ES5)
 - Minify CSS - JS - Images
 - Autoprefix styles for different browsers.
+- Lint JS with eslint
 - Live reload for development (nodemon)
 - Unit testing with Jest and Enzyme
 - Functional testing with Nightwatch
