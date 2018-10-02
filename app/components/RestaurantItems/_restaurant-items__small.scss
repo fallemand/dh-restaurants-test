@@ -21,7 +21,6 @@
   }
 
   .restaurant-items__item-name {
-    margin-right: 20px;
     font-size: $font-size-14;
     font-weight: $font-light;
     color: $font-color-primary;
@@ -30,10 +29,10 @@
   }
 
   .restaurant-items__item-price {
-    margin-right: 20px;
+    margin-right: 15px;
     font-size: $font-size-14;
     color: $font-color-primary;
-    width: 15%;
+    width: 13%;
     display: inline-block;
   }
 
@@ -45,5 +44,6 @@
     background-color: $background-color-primary;
     border-radius: 2px;
     width: auto;
+    cursor: pointer;
   }
 }
