@@ -21,7 +21,7 @@ describe('RestaurantsPage', () => {
   it('render component', () => {
     const component = shallow(<RestaurantsPage {...props} />);
     component.setState({
-      filteredRestaurants: restaurantsInfo,
+      paginatedResults: restaurantsInfo,
     });
     expect(escapeSnapshot(component)).toMatchSnapshot();
   });
@@ -29,7 +29,7 @@ describe('RestaurantsPage', () => {
   it('click on restaurant should redirect to restaurant page', () => {
     const component = shallow(<RestaurantsPage {...props} />);
     component.setState({
-      filteredRestaurants: restaurantsInfo,
+      paginatedResults: restaurantsInfo,
     });
     component.find('.restaurants__list-restaurants :first-child').simulate('click');
     expect(props.history.push).toHaveBeenCalledWith('/restaurants/1');

@@ -15,15 +15,21 @@ class RestaurantsPage extends React.Component {
     super(props);
     this.onSortChange = this.onSortChange.bind(this);
     this.onFilterSubmit = this.onFilterSubmit.bind(this);
-    this.setQueryParams = this.setQueryParams.bind(this);
     this.onFilterChange = this.onFilterChange.bind(this);
+    this.onPageChange = this.onPageChange.bind(this);
+    this.setQueryParams = this.setQueryParams.bind(this);
     this.sort = this.sort.bind(this);
     this.filter = this.filter.bind(this);
+    this.paginate = this.paginate.bind(this);
     this.loadFilteredAndSortedData = this.loadFilteredAndSortedData.bind(this);
     this.restaurants = [];
     this.state = {
-      filteredRestaurants: [],
+      paginatedResults: [],
       sortOrder: false,
+      page: {
+        active: 1,
+        amount: 7,
+      },
     };
   }
 
@@ -56,6 +62,13 @@ class RestaurantsPage extends React.Component {
     this.setState({ filter: field, value });
   }
 
+  onPageChange(pageNumber) {
+    const { page } = this.state;
+    page.active = pageNumber;
+    this.setQueryParams({ page: page.active });
+    this.setState({ page }, this.paginate());
+  }
+
   setQueryParams(query) {
     const { location, history } = this.props;
     const queryParams = queryString.parse(location.search);
@@ -66,19 +79,30 @@ class RestaurantsPage extends React.Component {
     });
   }
 
+  paginate() {
+    const { filteredRestaurants, page } = this.state;
+    const showFrom = (page.active - 1) * page.amount;
+    const showTo = showFrom + page.amount;
+    const paginatedResults = filteredRestaurants.slice(showFrom, showTo);
+    page.total = filteredRestaurants.length;
+    this.setState({
+      paginatedResults,
+      page,
+    });
+  }
+
   filter(field, value) {
     const filteredRestaurants = this.restaurants.filter(
       restaurant => restaurant[field].toString().includes(value),
     );
     this.setState({
       filteredRestaurants,
-    });
+    }, () => this.paginate());
   }
 
   sort(field, sortOrder) {
     const { filteredRestaurants } = this.state;
-    const newRestaurants = filteredRestaurants;
-    newRestaurants.sort((a, b) => {
+    filteredRestaurants.sort((a, b) => {
       let result = a[field].toString().localeCompare(b[field].toString());
       if (sortOrder) {
         result *= (-1);
@@ -86,29 +110,36 @@ class RestaurantsPage extends React.Component {
       return result;
     });
     this.setState({
-      filteredRestaurants: newRestaurants,
-    });
+      filteredRestaurants,
+    }, () => this.paginate());
   }
 
   loadFilteredAndSortedData() {
     const { location } = this.props;
-    const { sort, sortOrder, filter, value } = queryString.parse(location.search);
+    const { sort, sortOrder, filter, value, page: activePage } = queryString.parse(location.search);
+    if (activePage) {
+      const { page } = this.state;
+      page.active = parseInt(activePage, 10);
+      this.setState({ page });
+    }
     if (filter && value) {
       this.filter(filter, value);
       this.setState({ filter, value });
     } else {
-      this.setState({ filteredRestaurants: this.restaurants }, () => {
-        if (sort) {
-          const parsedSortOrder = sortOrder === 'true';
-          this.sort(sort, parsedSortOrder);
-          this.setState({ sort, sortOrder: parsedSortOrder });
-        }
-      });
+      this.setState({ filteredRestaurants: this.restaurants });
+    }
+    if (sort) {
+      const parsedSortOrder = sortOrder === 'true';
+      this.sort(sort, parsedSortOrder);
+      this.setState({ sort, sortOrder: parsedSortOrder });
+    }
+    if (!(filter && value && sort)) {
+      this.paginate();
     }
   }
 
   render() {
-    const { filteredRestaurants, sort, sortOrder, filter, value } = this.state;
+    const { paginatedResults, sort, sortOrder, filter, value, page } = this.state;
     const { history } = this.props;
     const sortAndFilterFields = [
       { value: 'name', label: 'Name' },
@@ -142,7 +173,7 @@ class RestaurantsPage extends React.Component {
             />
           </div>
           <div className="restaurants__list-restaurants">
-            { filteredRestaurants.map(restaurant => (
+            { paginatedResults.map(restaurant => (
               <RestaurantInfo
                 key={restaurant.id}
                 onClick={() => (history.push(`/restaurants/${restaurant.id}`))}
@@ -154,7 +185,14 @@ class RestaurantsPage extends React.Component {
               />
             ))}
           </div>
-          <Pagination total={50} show={10} />
+          { page.total > 1 && (
+            <Pagination
+              active={page.active}
+              total={page.total}
+              show={page.amount}
+              onChange={this.onPageChange}
+            />
+          )}
         </div>
       </div>
     );

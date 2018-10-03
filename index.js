@@ -19,5 +19,5 @@ app.use('/api', api);
 
 // Start server
 app.listen(config.port, config.host, () => {
-  console.log(`App listening on: ${config.host}:${config.port}`);
+  console.log(`App started | navigate to: http://${config.host}:${config.port}`);
 });

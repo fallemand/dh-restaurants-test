@@ -13,7 +13,6 @@ exports[`RestaurantsPage render component 1`] = `
     <div className='restaurants__list-restaurants'>
       <RestaurantInfo onClick={[Function: onClick]} logo='__LOGOURI__' title='__TITLE__' rating='__RATING__' location='__LOCATION__' categories={{...}} className={{...}} />
     </div>
-    <Pagination total={50} show={10} className={{...}} />
   </div>
 </div>"
 `;

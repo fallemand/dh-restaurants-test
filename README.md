@@ -17,7 +17,6 @@
 - Lint JS with eslint
 - Live reload for development (nodemon)
 - Unit testing with Jest and Enzyme
-- Functional testing with Nightwatch
 - 404 page
 
 ### Considerations
@@ -28,7 +27,7 @@ I filter them in the Api and keep only the first one.
 - Handle errors in the API.
 - Handle incorrect Ids in the App.
 - Add Redux for state handling.  
-- Complete the pagination behavior.
+- Functional testing with Nightwatch
 - Generate different bundles in development (with sourcemaps, not minified, etc).
 
 ---

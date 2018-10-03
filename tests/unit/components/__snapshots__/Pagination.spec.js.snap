@@ -2,41 +2,41 @@
 
 exports[`Pagination render component 1`] = `
 "<div className='__CLASSNAME__ pagination'>
-  <a className='pagination__number' href='#/'>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     «
-  </a>
-  <a className='pagination__number' href='/#'>
-    0
-  </a>
-  <a className='pagination__number' href='/#'>
+  </button>
+  <button type='button' className='pagination__number pagination__number--active' onClick={[Function: onClick]}>
     1
-  </a>
-  <a className='pagination__number' href='/#'>
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     2
-  </a>
-  <a className='pagination__number' href='/#'>
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     3
-  </a>
-  <a className='pagination__number' href='/#'>
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     4
-  </a>
-  <a className='pagination__number' href='/#'>
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     5
-  </a>
-  <a className='pagination__number' href='/#'>
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     6
-  </a>
-  <a className='pagination__number' href='/#'>
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     7
-  </a>
-  <a className='pagination__number' href='/#'>
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     8
-  </a>
-  <a className='pagination__number' href='/#'>
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     9
-  </a>
-  <a className='pagination__number' href='#/'>
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
+    10
+  </button>
+  <button type='button' className='pagination__number' onClick={[Function: onClick]}>
     »
-  </a>
+  </button>
 </div>"
 `;
