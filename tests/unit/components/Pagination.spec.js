@@ -21,7 +21,7 @@ describe('Pagination', () => {
     expect(buttons).toHaveLength((props.total / props.show) + 2);
   });
 
-  it('click on another page should call onChange', () => {
+  it('click on another page should call onChange with page number', () => {
     const component = shallow(<Pagination {...props} />);
     // Active page is 1, so next number is 2.
     const pageTwoNumber = component.find('.pagination__number--active + .pagination__number');

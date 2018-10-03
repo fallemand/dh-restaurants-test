@@ -17,15 +17,17 @@
 - Lint JS with eslint
 - Live reload for development (nodemon)
 - Unit testing with Jest and Enzyme
+- Sort (ASC - DESC) / Filter / Pagination / Loading
 - 404 page
 
 ### Considerations
 In the restaurants list, there are some duplicated restaurants (same id and name).   
 I filter them in the Api and keep only the first one.  
 
-**Things I would love to do, but I couldn't for lack of time:**  
+**Things I would have loved to do, but I couldn't for lack of time:**  
 - Handle errors in the API.
 - Handle incorrect Ids in the App.
+- Deploy in demo server and provide public url.
 - Add Redux for state handling.  
 - Functional testing with Nightwatch
 - Generate different bundles in development (with sourcemaps, not minified, etc).
