@@ -1,0 +1,17 @@
+@import '../../styles/variables';
+
+.restaurant-items {
+  .restaurant-items__item-name {
+    min-width: 150px;
+    width: auto;
+  }
+
+  .restaurant-items__item-price {
+    min-width: 100px;
+    width: auto;
+  }
+
+  .restaurant-items__section-item {
+    margin: 15px 0;
+  }
+}

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RestaurantItems render component 1`] = `"<div className='__CLASSNAME__ restaurant-items' />"`;

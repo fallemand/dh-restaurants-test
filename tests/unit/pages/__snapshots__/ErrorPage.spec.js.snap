@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorPage render component with props 1`] = `
+"<div className='error'>
+  <h1 className='error__title'>
+    __TITLE__
+  </h1>
+  <h2 className='error__subtitle'>
+    __MESSAGE__
+  </h2>
+  <button className='error__button' type='button' onClick={[Function: onClick]}>
+    __BUTTON__
+  </button>
+</div>"
+`;
+
+exports[`ErrorPage render component without props 1`] = `
+"<div className='error'>
+  <h1 className='error__title'>
+    Error :(
+  </h1>
+  <h2 className='error__subtitle'>
+    An error ocurred! Please try again later.
+  </h2>
+  <button className='error__button' type='button' onClick={[Function: onClick]}>
+    Retry!
+  </button>
+</div>"
+`;

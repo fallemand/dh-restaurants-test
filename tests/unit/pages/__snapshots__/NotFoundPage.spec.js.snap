@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundPage render component 1`] = `"<ErrorPage title='404' message='We couldn\\\\'t find the page you\\\\'re looking for :(' buttonLabel='Go Home!' onClick={[Function: onClick]} />"`;

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RestaurantItems render component 1`] = `
+"<section className='__CLASSNAME__ restaurant-items__section'>
+  <h2 className='restaurant-items__section-name'>
+    __NAME__
+  </h2>
+  <ul className='restaurant-items__section-items'>
+    <li className='restaurant-items__section-item'>
+      <span className='restaurant-items__item-name'>
+        __ITEMNAME1__
+      </span>
+      <span className='restaurant-items__item-price'>
+        $99.99
+      </span>
+      <button type='button' onClick={[Function: onClick]} className='restaurant-items__item-buy'>
+        Add to cart
+      </button>
+    </li>
+    <li className='restaurant-items__section-item'>
+      <span className='restaurant-items__item-name'>
+        __ITEMNAME2__
+      </span>
+      <span className='restaurant-items__item-price'>
+        $99.99
+      </span>
+      <button type='button' onClick={[Function: onClick]} className='restaurant-items__item-buy'>
+        Add to cart
+      </button>
+    </li>
+    <li className='restaurant-items__section-item'>
+      <span className='restaurant-items__item-name'>
+        __ITEMNAME3__
+      </span>
+      <span className='restaurant-items__item-price'>
+        $99.99
+      </span>
+      <button type='button' onClick={[Function: onClick]} className='restaurant-items__item-buy'>
+        Add to cart
+      </button>
+    </li>
+  </ul>
+</section>"
+`;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sort render component 1`] = `
+"<div className='sort'>
+  <Dropdown name='sort' title='Sort' className='sort__field' value='__VAL1__' options={{...}} onChange={[Function: bound handleDropdownChange]} />
+  <button className='sort__order' title='Change sort direction' type='button' onClick={[Function: bound handleSortOrderChange]}>
+    <img className='sort__order-img' src={{...}} alt='Up - Down' />
+  </button>
+</div>"
+`;
+
+exports[`Sort render with className 1`] = `
+"<div className='__CLASSNAME__ sort'>
+  <Dropdown name='sort' title='Sort' className='sort__field' value='__VAL1__' options={{...}} onChange={[Function: bound handleDropdownChange]} />
+  <button className='sort__order' title='Change sort direction' type='button' onClick={[Function: bound handleSortOrderChange]}>
+    <img className='sort__order-img' src={{...}} alt='Up - Down' />
+  </button>
+</div>"
+`;

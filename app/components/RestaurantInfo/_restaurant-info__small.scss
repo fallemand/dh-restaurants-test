@@ -1,0 +1,53 @@
+.restaurant-info {
+  text-align: center;
+  border-radius: 2px;
+  padding: 15px 10px;
+  margin: 15px 0;
+
+  &.restaurant-info--clickable {
+    background-color: $background-color-secondary;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    &:hover {
+      box-shadow: 0 0 3px $border-color-hover;
+      background-color: $background-color-hover;
+    }
+  }
+
+  .restaurant-info__logo {
+    max-width: 100px;
+  }
+
+  .restaurant-info__title {
+    font-size: $font-size-18;
+    color: $font-color-primary;
+    margin: 5px;
+  }
+
+  .restaurant-info__rating {
+    font-size: 14px;
+    color: $font-color-secondary;
+    margin-right: 10px;
+
+    small {
+      color: $font-color-tertiary;
+      font-size: $font-size-12;
+    }
+  }
+
+  .restaurant-info__location {
+    font-size: $font-size-12;
+    color: $font-color-secondary;
+    margin: 0 0 10px;
+    display: inline-block;
+  }
+
+  .restaurant-info__category {
+    border: 1px solid $border-color;
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: $font-size-12;
+    margin-right: 5px;
+    color: $font-color-primary;
+  }
+}

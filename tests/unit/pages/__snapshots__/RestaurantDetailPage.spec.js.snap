@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RestaurantsPage render component 1`] = `
+"<div className='restaurant-detail'>
+  <button className='restaurant-detail__back' type='button' onClick={[Function: onClick]}>
+    &lt; Back
+  </button>
+  <RestaurantInfo className='restaurant-detail__info' logo='__LOGOURI__' title='__TITLE__' rating='__RATING__' location='__LOCATION__' categories={{...}} onClick={{...}} />
+  <RestaurantItems sections={{...}} className={{...}} />
+</div>"
+`;

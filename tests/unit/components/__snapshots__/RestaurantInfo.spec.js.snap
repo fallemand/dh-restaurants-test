@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RestaurantInfo render clickeable component 1`] = `
+"<div onClick={[Function: mockConstructor]} className='__CLASSNAME__ restaurant-info restaurant-info--clickable'>
+  <img className='restaurant-info__logo' src='__LOGOURI__' alt='Restaurant Logo' />
+  <div className='restaurant-info__content'>
+    <h2 className='restaurant-info__title'>
+      __TITLE__
+    </h2>
+    <span className='restaurant-info__rating'>
+      __RATING__
+      <small>
+         /5
+      </small>
+    </span>
+    <p className='restaurant-info__location'>
+      __LOCATION__
+    </p>
+    <div className='restaurant-info__categories'>
+      <span className='restaurant-info__category'>
+        __CAT1__
+      </span>
+      <span className='restaurant-info__category'>
+        __CAT2__
+      </span>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`RestaurantInfo render component 1`] = `
+"<div onClick={{...}} className='__CLASSNAME__ restaurant-info'>
+  <img className='restaurant-info__logo' src='__LOGOURI__' alt='Restaurant Logo' />
+  <div className='restaurant-info__content'>
+    <h2 className='restaurant-info__title'>
+      __TITLE__
+    </h2>
+    <span className='restaurant-info__rating'>
+      __RATING__
+      <small>
+         /5
+      </small>
+    </span>
+    <p className='restaurant-info__location'>
+      __LOCATION__
+    </p>
+    <div className='restaurant-info__categories'>
+      <span className='restaurant-info__category'>
+        __CAT1__
+      </span>
+      <span className='restaurant-info__category'>
+        __CAT2__
+      </span>
+    </div>
+  </div>
+</div>"
+`;

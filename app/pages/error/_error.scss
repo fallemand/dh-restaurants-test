@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.error {
+  text-align: center;
+
+  .error__title {
+    font-size: 100px;
+    font-weight: $font-light;
+    margin: 20px 0;
+    color: $font-color-primary;
+  }
+
+  .error__subtitle {
+    font-size: $font-size-20;
+    font-weight: $font-light;
+    margin: 20px 0;
+    color: $font-color-secondary;
+    margin-bottom: 40px;
+  }
+
+  .error__button {
+    font-size: $font-size-16;
+    color: $font-color-primary;
+    background-color: $background-color-secondary;
+    padding: 10px 15px;
+    border: 0;
+    font-weight: $font-light;
+    cursor: pointer;
+  }
+}
