@@ -49,6 +49,7 @@ class Filter extends React.Component {
           placeholder="Filter Value"
           type="text"
           value={value}
+          disabled={!field}
           onChange={this.handleQueryChange}
         />
       </form>
