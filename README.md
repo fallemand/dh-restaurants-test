@@ -27,6 +27,7 @@ I filter them in the Api and keep only the first one.
 **Things I would have loved to do, but I couldn't for lack of time:**  
 - Handle errors in the API.
 - Handle incorrect Ids in the App.
+- Add WAI-ARIA markup
 - Deploy in demo server and provide public url.
 - Add Redux for state handling.  
 - Functional testing with Nightwatch
@@ -34,7 +35,7 @@ I filter them in the Api and keep only the first one.
 
 ---
 ### Run Project
-`Node: v8.9.1`  
+`Node: v8.9.2`  
 #### 1) Install Dependencies
 ```
 npm install
