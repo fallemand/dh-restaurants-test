@@ -19,47 +19,33 @@ class RestaurantsPage extends React.Component {
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
     this.setQueryParams = this.setQueryParams.bind(this);
-    this.sort = this.sort.bind(this);
-    this.filter = this.filter.bind(this);
-    this.paginate = this.paginate.bind(this);
-    this.loadFilteredAndSortedData = this.loadFilteredAndSortedData.bind(this);
-    this.restaurants = [];
+    this.getParamsFromUrl = this.getParamsFromUrl.bind(this);
+    this.loadData = this.loadData.bind(this);
+    this.pageSize = 7;
     this.state = {
-      paginatedResults: [],
+      restaurants: [],
       sortOrder: false,
       loading: true,
-      page: {
-        active: 1,
-        amount: 7,
-      },
+      page: 1,
     };
   }
 
   componentWillMount() {
-    restaurantsService.restaurantsList().then((data) => {
-      this.restaurants = data;
-      this.loadFilteredAndSortedData();
-    });
+    const params = this.getParamsFromUrl();
+    this.loadData(params);
   }
 
   onSortChange(data) {
     const { field, order } = data;
     if (field) {
-      this.setState({ sort: field, sortOrder: order, loading: true });
-      this.setQueryParams({ sort: field, sortOrder: order });
-      this.sort(field, order);
+      this.loadData({ sort: field, sortOrder: order });
     }
   }
 
   onFilterSubmit(query) {
-    // If you filter, go back to page 1.
-    const { page } = this.state;
-    page.active = 1;
-    this.setState({ loading: true, page });
     const { field, value } = query;
     if (field) {
-      this.setQueryParams({ filter: field, value, page: page.active });
-      this.filter(field, value);
+      this.loadData({ filter: field, value, page: 1 });
     }
   }
 
@@ -69,10 +55,7 @@ class RestaurantsPage extends React.Component {
   }
 
   onPageChange(pageNumber) {
-    const { page } = this.state;
-    page.active = pageNumber;
-    this.setQueryParams({ page: page.active });
-    this.setState({ page, loading: true }, this.paginate());
+    this.loadData({ page: pageNumber });
   }
 
   setQueryParams(query) {
@@ -85,71 +68,50 @@ class RestaurantsPage extends React.Component {
     });
   }
 
-  paginate() {
-    // Timeout to show loading :D
-    setTimeout(() => {
-      const { filteredRestaurants, page } = this.state;
-      const showFrom = (page.active - 1) * page.amount;
-      const showTo = showFrom + page.amount;
-      const paginatedResults = filteredRestaurants.slice(showFrom, showTo);
-      page.total = filteredRestaurants.length;
-      this.setState({
-        loading: false,
-        paginatedResults,
-        page,
-      });
-    }, 1000);
-  }
-
-  filter(field, value) {
-    const filteredRestaurants = this.restaurants.filter(
-      restaurant => restaurant[field].toString().toLowerCase().includes(value.toLowerCase()),
-    );
-    this.setState({
-      filteredRestaurants,
-    }, () => this.paginate());
-  }
-
-  sort(field, sortOrder) {
-    const { filteredRestaurants } = this.state;
-    filteredRestaurants.sort((a, b) => {
-      let result = a[field].toString().localeCompare(b[field].toString());
-      if (sortOrder) {
-        result *= (-1);
-      }
-      return result;
-    });
-    this.setState({
-      filteredRestaurants,
-    }, () => this.paginate());
-  }
-
-  loadFilteredAndSortedData() {
+  getParamsFromUrl() {
     const { location } = this.props;
-    const { sort, sortOrder, filter, value, page: activePage } = queryString.parse(location.search);
-    if (activePage) {
-      const { page } = this.state;
-      page.active = parseInt(activePage, 10);
-      this.setState({ page });
-    }
-    if (filter && value) {
-      this.filter(filter, value);
-      this.setState({ filter, value });
-    } else {
-      this.setState({ filteredRestaurants: this.restaurants });
-    }
-    if (sort) {
-      const parsedSortOrder = sortOrder === 'true';
-      this.sort(sort, parsedSortOrder);
-      this.setState({ sort, sortOrder: parsedSortOrder });
-    }
-    if (!(filter && value && sort)) {
-      this.paginate();
-    }
+    const params = queryString.parse(location.search);
+    return params;
+  }
+
+  completeSearchParams(params) {
+    const { pageSize, state: { filter, sort, sortOrder, page, value } } = this;
+    return {
+      filter,
+      sort,
+      sortOrder,
+      page,
+      pageSize,
+      value,
+      ...params,
+    };
+  }
+
+  loadData(params) {
+    const completeParams = this.completeSearchParams(params);
+    this.setState({
+      loading: true,
+    });
+    restaurantsService.getRestaurants(completeParams).then((data) => {
+      const { total, restaurants } = data;
+      this.setQueryParams(params);
+      this.setState({
+        ...completeParams,
+        restaurants,
+        total,
+      });
+      // This is in order to force the loading to show for
+      // demo and wait for images to load.
+      setTimeout(() => {
+        this.setState({
+          loading: false,
+        });
+      }, 300);
+    });
   }
 
   render() {
-    const { paginatedResults, sort, sortOrder, filter, value, page, loading } = this.state;
+    const { restaurants, sort, sortOrder, filter, value, total, page, loading } = this.state;
     const { history } = this.props;
     const sortAndFilterFields = [
       { value: 'name', label: 'Name' },
@@ -187,7 +149,7 @@ class RestaurantsPage extends React.Component {
             { 'restaurants__list-restaurants--loading': loading },
           )}
           >
-            { paginatedResults.map(restaurant => (
+            { restaurants.map(restaurant => (
               <RestaurantInfo
                 key={restaurant.id}
                 onClick={() => (history.push(`/restaurants/${restaurant.id}`))}
@@ -199,11 +161,11 @@ class RestaurantsPage extends React.Component {
               />
             ))}
           </div>
-          { page.total > 1 && (
+          { total > 1 && (
             <Pagination
-              active={page.active}
-              total={page.total}
-              show={page.amount}
+              active={page}
+              total={total}
+              show={this.pageSize}
               onChange={this.onPageChange}
             />
           )}
