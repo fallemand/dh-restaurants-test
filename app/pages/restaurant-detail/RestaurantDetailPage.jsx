@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import RestaurantInfo from '../../components/RestaurantInfo';
 import RestaurantItems from '../../components/RestaurantItems';
 import restaurantsService from '../../services/restaurants.service';
 import './restaurant-detail.scss';
+import actions from '../../flow/actions';
+
 
 class RestaurantDetailPage extends React.Component {
   constructor(props) {
@@ -15,8 +18,10 @@ class RestaurantDetailPage extends React.Component {
   }
 
   componentWillMount() {
-    const { match } = this.props;
+    const { match, increment } = this.props;
     const { id } = match.params;
+    console.log(this.props);
+    increment();
     restaurantsService.restaurantDetail(id).then((data) => {
       this.setState({
         info: data,
@@ -58,4 +63,4 @@ RestaurantDetailPage.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default withRouter(RestaurantDetailPage);
+export default connect(null, actions)(withRouter(RestaurantDetailPage));

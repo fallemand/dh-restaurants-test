@@ -60,6 +60,7 @@
     "nodemon": "^1.18.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
+    "redux-devtools-extension": "^2.13.5",
     "regenerator-runtime": "^0.12.1",
     "sass-loader": "^7.1.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
@@ -73,7 +74,10 @@
     "query-string": "^5.1.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
     "whatwg-fetch": "^3.0.0"
   }
 }
