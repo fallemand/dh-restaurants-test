@@ -62,10 +62,13 @@ class RestaurantsPage extends React.Component {
     const { location, history } = this.props;
     const queryParams = queryString.parse(location.search);
     Object.assign(queryParams, query);
-    history.push({
-      pathname: '/restaurants',
-      search: `?${queryString.stringify(queryParams)}`,
-    });
+    const queryParamsString = `?${queryString.stringify(queryParams)}`;
+    if (queryParamsString !== location.search) {
+      history.push({
+        pathname: '/restaurants',
+        search: queryParamsString,
+      });
+    }
   }
 
   getParamsFromUrl() {
@@ -97,6 +100,7 @@ class RestaurantsPage extends React.Component {
       this.setQueryParams(params);
       this.setState({
         ...completeParams,
+        sortOrder: !!completeParams.sortOrder, // parse to boolean
         restaurants,
         total,
       });
@@ -163,7 +167,7 @@ class RestaurantsPage extends React.Component {
           </div>
           { total > 1 && (
             <Pagination
-              active={page}
+              active={parseInt(page, 10)}
               total={total}
               show={this.pageSize}
               onChange={this.onPageChange}

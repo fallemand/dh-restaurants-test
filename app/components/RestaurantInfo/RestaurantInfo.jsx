@@ -27,7 +27,7 @@ RestaurantInfo.propTypes = {
   onClick: PropTypes.func,
   logo: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  rating: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
   location: PropTypes.string.isRequired,
   categories: PropTypes.array.isRequired,
 };

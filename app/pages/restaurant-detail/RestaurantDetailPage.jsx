@@ -18,10 +18,8 @@ class RestaurantDetailPage extends React.Component {
   }
 
   componentWillMount() {
-    const { match, increment } = this.props;
+    const { match } = this.props;
     const { id } = match.params;
-    console.log(this.props);
-    increment();
     restaurantsService.restaurantDetail(id).then((data) => {
       this.setState({
         info: data,
