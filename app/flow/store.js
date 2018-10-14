@@ -7,7 +7,7 @@ import reducer from './reducer';
 const store = createStore(
   reducer,
   {
-    value: 0,
+    page: 1,
   },
   composeWithDevTools(applyMiddleware(thunk)),
 );

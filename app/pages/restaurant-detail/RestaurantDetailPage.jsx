@@ -48,7 +48,6 @@ RestaurantDetailPage.propTypes = {
   history: PropTypes.object.isRequired,
   restaurant: PropTypes.object,
   fetchRestaurant: PropTypes.func.isRequired,
-  clickRestaurantBack: PropTypes.func.isRequired,
 };
 
 RestaurantDetailPage.defaultProps = {

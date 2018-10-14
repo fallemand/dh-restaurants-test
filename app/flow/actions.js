@@ -2,13 +2,19 @@ import { createAction } from 'redux-actions';
 import restaurantsService from '../services/restaurants.service';
 
 const asyncActionCreator = (name, asyncFunction) => {
+  const actionPending = createAction(name);
   const actionSuccess = createAction(`${name}_SUCCESS`);
   const actionError = createAction(`${name}_ERROR`);
   const action = (...params) => (dispatch) => {
-    asyncFunction(...params)
-      .then(restaurant => dispatch(actionSuccess(restaurant)))
-      .catch(error => dispatch(actionError(error)));
+    dispatch(actionPending(...params));
+    // Delay in order to show loading :D
+    setTimeout(() => {
+      asyncFunction(...params)
+        .then(restaurant => dispatch(actionSuccess(restaurant)))
+        .catch(error => dispatch(actionError(error)));
+    }, 1000);
   };
+  action.pending = actionPending;
   action.success = actionSuccess;
   action.error = actionError;
   return action;
@@ -16,8 +22,7 @@ const asyncActionCreator = (name, asyncFunction) => {
 
 const actions = {
   changePage: createAction('PAGE_CHANGE'),
-  clickRestaurant: createAction('RESTAURANT_CLICK'),
-  clickRestaurantBack: createAction('RESTAURANT-BACK_CLICK'),
+  changeFilter: createAction('FILTER_CHANGE'),
   fetchRestaurants: asyncActionCreator(
     'RESTAURANTS_FETCH',
     queryParams => restaurantsService.getRestaurants(queryParams),

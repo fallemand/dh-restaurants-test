@@ -1,14 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import queryString from 'query-string';
+import actions from '../../flow/actions';
 import Filter from '../../components/Filter';
 import Sort from '../../components/Sort';
 import RestaurantInfo from '../../components/RestaurantInfo';
 import Pagination from '../../components/Pagination';
 import logo from '../../assets/images/logo.png';
-import restaurantsService from '../../services/restaurants.service';
 import './restaurants.scss';
 
 class RestaurantsPage extends React.Component {
@@ -22,12 +23,6 @@ class RestaurantsPage extends React.Component {
     this.getParamsFromUrl = this.getParamsFromUrl.bind(this);
     this.loadData = this.loadData.bind(this);
     this.pageSize = 7;
-    this.state = {
-      restaurants: [],
-      sortOrder: false,
-      loading: true,
-      page: 1,
-    };
   }
 
   componentWillMount() {
@@ -51,7 +46,8 @@ class RestaurantsPage extends React.Component {
 
   onFilterChange(data) {
     const { field, value } = data;
-    this.setState({ filter: field, value });
+    const { changeFilter } = this.props;
+    changeFilter({ filter: field, value });
   }
 
   onPageChange(pageNumber) {
@@ -78,7 +74,7 @@ class RestaurantsPage extends React.Component {
   }
 
   completeSearchParams(params) {
-    const { pageSize, state: { filter, sort, sortOrder, page, value } } = this;
+    const { pageSize, props: { filter, sort, sortOrder, page, value } } = this;
     return {
       filter,
       sort,
@@ -92,31 +88,13 @@ class RestaurantsPage extends React.Component {
 
   loadData(params) {
     const completeParams = this.completeSearchParams(params);
-    this.setState({
-      loading: true,
-    });
-    restaurantsService.getRestaurants(completeParams).then((data) => {
-      const { total, restaurants } = data;
-      this.setQueryParams(params);
-      this.setState({
-        ...completeParams,
-        sortOrder: !!completeParams.sortOrder, // parse to boolean
-        restaurants,
-        total,
-      });
-      // This is in order to force the loading to show for
-      // demo and wait for images to load.
-      setTimeout(() => {
-        this.setState({
-          loading: false,
-        });
-      }, 300);
-    });
+    this.setQueryParams(params);
+    const { fetchRestaurants } = this.props;
+    fetchRestaurants(completeParams);
   }
 
   render() {
-    const { restaurants, sort, sortOrder, filter, value, total, page, loading } = this.state;
-    const { history } = this.props;
+    const { restaurants, sort, sortOrder, filter, total, page, loading, history, value } = this.props;
     const sortAndFilterFields = [
       { value: 'name', label: 'Name' },
       { value: 'rating', label: 'Rating' },
@@ -182,6 +160,41 @@ class RestaurantsPage extends React.Component {
 RestaurantsPage.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
+  fetchRestaurants: PropTypes.func.isRequired,
+  changeFilter: PropTypes.func.isRequired,
+  restaurants: PropTypes.array,
+  sort: PropTypes.string,
+  sortOrder: PropTypes.string,
+  filter: PropTypes.string,
+  value: PropTypes.string,
+  page: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  total: PropTypes.number,
+  loading: PropTypes.bool,
 };
 
-export default withRouter(RestaurantsPage);
+RestaurantsPage.defaultProps = {
+  restaurants: [],
+  total: 0,
+  sort: '',
+  sortOrder: '',
+  filter: '',
+  value: '',
+  loading: false,
+  page: 1,
+};
+
+const mapStateToProps = state => ({
+  restaurants: state.restaurants,
+  sort: state.sort,
+  sortOrder: state.sortOrder,
+  filter: state.filter,
+  value: state.value,
+  total: state.total,
+  page: state.page,
+  loading: state.loading,
+});
+
+export default connect(mapStateToProps, actions)(withRouter(RestaurantsPage));

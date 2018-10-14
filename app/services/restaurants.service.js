@@ -41,8 +41,8 @@ const getRestaurants = ({ filter, value, sort, sortOrder, page, pageSize } = {})
 
     if (sort) {
       restaurants.sort((a, b) => {
-        let result = a[sort].localeCompare(b[sort]);
-        if (sortOrder) {
+        let result = a[sort].toString().localeCompare(b[sort].toString());
+        if (sortOrder === 'true') {
           result *= -1;
         }
         return result;
