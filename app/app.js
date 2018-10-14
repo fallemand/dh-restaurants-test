@@ -18,10 +18,7 @@ import './styles/_common.scss';
  * If can't get token, show error page
  */
 authService()
-  .then((token) => {
-    // Save token
-    window.sessionStorage.setItem('token', token);
-
+  .then(() => {
     // Render SPA
     render((
       <Provider store={store}>
