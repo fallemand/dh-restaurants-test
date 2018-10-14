@@ -30,7 +30,7 @@ const restaurantDetail = id => (
  * @param {Object} params to filter and sort response - [optional]
  * @returns {Object} restaurants: list of restaurants, total: total restaurants
  */
-const getRestaurants = ({ filter, value, sort, sortOrder, page, pageSize }) => {
+const getRestaurants = ({ filter, value, sort, sortOrder, page, pageSize } = {}) => {
   return restaurantsList().then((data) => {
     let restaurants = data;
     if (filter) {
