@@ -1,15 +1,27 @@
-const reducer = (state, action) => {
-  if (action.type === 'INCREMENT') {
+import { handleActions } from 'redux-actions';
+import actions from './actions';
+
+const reducer = handleActions({
+  [actions.changePage]: (state, action) => (state),
+  [actions.clickRestaurant]: (state, action) => (state),
+  [actions.clickRestaurantBack]: (state, action) => (state),
+  [actions.fetchRestaurants.error]: (state, action) => (state),
+  [actions.fetchRestaurants.success]: (state, action) => ({
+    ...state,
+    restaurants: action.payload,
+  }),
+  [actions.fetchRestaurant.error]: (state, action) => {
     return {
-      value: state.value + 1,
+      ...state,
+      restaurant: action.payload,
     };
-  }
-  if (action.type === 'DECREMENT') {
+  },
+  [actions.fetchRestaurant.success]: (state, action) => {
     return {
-      value: state.value - 1,
+      ...state,
+      restaurant: action.payload,
     };
-  }
-  return state;
-};
+  },
+}, {});
 
 export default reducer;
