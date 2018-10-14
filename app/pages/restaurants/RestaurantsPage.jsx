@@ -61,9 +61,9 @@ class RestaurantsPage extends React.Component {
   setQueryParams(query) {
     const { location, history } = this.props;
     const queryParams = queryString.parse(location.search);
-    Object.assign(queryParams, query);
-    const queryParamsString = `?${queryString.stringify(queryParams)}`;
-    if (queryParamsString !== location.search) {
+    const newQueryParams = Object.assign({}, queryParams, query);
+    if (JSON.stringify(queryParams) !== JSON.stringify(newQueryParams)) {
+      const queryParamsString = `?${queryString.stringify(newQueryParams)}`;
       history.push({
         pathname: '/restaurants',
         search: queryParamsString,
