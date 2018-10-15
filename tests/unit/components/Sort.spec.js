@@ -5,7 +5,7 @@ describe('Sort', () => {
   const props = {
     onChange: jest.fn(),
     field: '__VAL1__',
-    order: true,
+    order: 'true',
     fields: [
       { value: '__VAL1__', label: '__LAB1__' },
       { value: '__VAL2__', label: '__LAB2__', selected: true },

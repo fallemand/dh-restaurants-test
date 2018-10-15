@@ -8,7 +8,7 @@ describe('RestaurantsPage', () => {
     id: 1,
     logoUri: '__LOGOURI__',
     name: '__TITLE__',
-    rating: '__RATING__',
+    rating: 3,
     location: '__LOCATION__',
     categories: ['__CAT1__', '__CAT2__'],
     className: '__CLASSNAME__',
@@ -16,13 +16,26 @@ describe('RestaurantsPage', () => {
   const props = {
     history: { push: jest.fn() },
     location: { search: '' },
+    restaurants: restaurantsInfo,
+    total: 1,
+    page: 1,
+    loading: false,
+    fetchRestaurants: jest.fn(),
+    changeFilter: jest.fn(),
   };
 
   it('render component', () => {
     const component = shallow(<RestaurantsPage {...props} />);
-    component.setState({
-      paginatedResults: restaurantsInfo,
-    });
+    expect(escapeSnapshot(component)).toMatchSnapshot();
+  });
+
+  it('render component with filter', () => {
+    const component = shallow(<RestaurantsPage filter="name" value="__TEST__" {...props} />);
+    expect(escapeSnapshot(component)).toMatchSnapshot();
+  });
+
+  it('render component with sort', () => {
+    const component = shallow(<RestaurantsPage sort="name" sortOrder="false" {...props} />);
     expect(escapeSnapshot(component)).toMatchSnapshot();
   });
 
