@@ -10,3 +10,4 @@ global.escapeSnapshot = component => component.debug().replace(/"/g, '\'');
 
 // Mocks
 jest.mock('react-router-dom', () => ({ withRouter: Component => Component }));
+jest.mock('react-redux', () => ({ connect: () => Component => Component }));

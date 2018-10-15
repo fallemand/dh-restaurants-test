@@ -6,7 +6,7 @@ import './_restaurant-items.scss';
 
 const RestaurantItems = ({ className, sections }) => (
   <div className={classnames(className, 'restaurant-items')}>
-    {sections.map(section => <RestaurantItemsSection {...section} />)}
+    {sections.map(section => <RestaurantItemsSection key={section.name} {...section} />)}
   </div>
 );
 

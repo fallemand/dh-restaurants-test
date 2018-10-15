@@ -1,14 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import queryString from 'query-string';
+import actions from '../../flow/actions';
 import Filter from '../../components/Filter';
 import Sort from '../../components/Sort';
 import RestaurantInfo from '../../components/RestaurantInfo';
 import Pagination from '../../components/Pagination';
 import logo from '../../assets/images/logo.png';
-import restaurantsService from '../../services/restaurants.service';
 import './restaurants.scss';
 
 class RestaurantsPage extends React.Component {
@@ -19,138 +20,81 @@ class RestaurantsPage extends React.Component {
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
     this.setQueryParams = this.setQueryParams.bind(this);
-    this.sort = this.sort.bind(this);
-    this.filter = this.filter.bind(this);
-    this.paginate = this.paginate.bind(this);
-    this.loadFilteredAndSortedData = this.loadFilteredAndSortedData.bind(this);
-    this.restaurants = [];
-    this.state = {
-      paginatedResults: [],
-      sortOrder: false,
-      loading: true,
-      page: {
-        active: 1,
-        amount: 7,
-      },
-    };
+    this.getParamsFromUrl = this.getParamsFromUrl.bind(this);
+    this.loadData = this.loadData.bind(this);
+    this.pageSize = 7;
   }
 
   componentWillMount() {
-    restaurantsService.restaurantsList().then((data) => {
-      this.restaurants = data;
-      this.loadFilteredAndSortedData();
-    });
+    const params = this.getParamsFromUrl();
+    this.loadData(params);
   }
 
   onSortChange(data) {
     const { field, order } = data;
     if (field) {
-      this.setState({ sort: field, sortOrder: order, loading: true });
-      this.setQueryParams({ sort: field, sortOrder: order });
-      this.sort(field, order);
+      this.loadData({ sort: field, sortOrder: order });
     }
   }
 
   onFilterSubmit(query) {
-    // If you filter, go back to page 1.
-    const { page } = this.state;
-    page.active = 1;
-    this.setState({ loading: true, page });
     const { field, value } = query;
     if (field) {
-      this.setQueryParams({ filter: field, value, page: page.active });
-      this.filter(field, value);
+      this.loadData({ filter: field, value, page: 1 });
     }
   }
 
   onFilterChange(data) {
     const { field, value } = data;
-    this.setState({ filter: field, value });
+    const { changeFilter } = this.props;
+    changeFilter({ filter: field, value });
   }
 
   onPageChange(pageNumber) {
-    const { page } = this.state;
-    page.active = pageNumber;
-    this.setQueryParams({ page: page.active });
-    this.setState({ page, loading: true }, this.paginate());
+    this.loadData({ page: pageNumber });
   }
 
   setQueryParams(query) {
     const { location, history } = this.props;
     const queryParams = queryString.parse(location.search);
-    Object.assign(queryParams, query);
-    history.push({
-      pathname: '/restaurants',
-      search: `?${queryString.stringify(queryParams)}`,
-    });
-  }
-
-  paginate() {
-    // Timeout to show loading :D
-    setTimeout(() => {
-      const { filteredRestaurants, page } = this.state;
-      const showFrom = (page.active - 1) * page.amount;
-      const showTo = showFrom + page.amount;
-      const paginatedResults = filteredRestaurants.slice(showFrom, showTo);
-      page.total = filteredRestaurants.length;
-      this.setState({
-        loading: false,
-        paginatedResults,
-        page,
+    const newQueryParams = Object.assign({}, queryParams, query);
+    if (JSON.stringify(queryParams) !== JSON.stringify(newQueryParams)) {
+      const queryParamsString = `?${queryString.stringify(newQueryParams)}`;
+      history.push({
+        pathname: '/restaurants',
+        search: queryParamsString,
       });
-    }, 1000);
+    }
   }
 
-  filter(field, value) {
-    const filteredRestaurants = this.restaurants.filter(
-      restaurant => restaurant[field].toString().toLowerCase().includes(value.toLowerCase()),
-    );
-    this.setState({
-      filteredRestaurants,
-    }, () => this.paginate());
-  }
-
-  sort(field, sortOrder) {
-    const { filteredRestaurants } = this.state;
-    filteredRestaurants.sort((a, b) => {
-      let result = a[field].toString().localeCompare(b[field].toString());
-      if (sortOrder) {
-        result *= (-1);
-      }
-      return result;
-    });
-    this.setState({
-      filteredRestaurants,
-    }, () => this.paginate());
-  }
-
-  loadFilteredAndSortedData() {
+  getParamsFromUrl() {
     const { location } = this.props;
-    const { sort, sortOrder, filter, value, page: activePage } = queryString.parse(location.search);
-    if (activePage) {
-      const { page } = this.state;
-      page.active = parseInt(activePage, 10);
-      this.setState({ page });
-    }
-    if (filter && value) {
-      this.filter(filter, value);
-      this.setState({ filter, value });
-    } else {
-      this.setState({ filteredRestaurants: this.restaurants });
-    }
-    if (sort) {
-      const parsedSortOrder = sortOrder === 'true';
-      this.sort(sort, parsedSortOrder);
-      this.setState({ sort, sortOrder: parsedSortOrder });
-    }
-    if (!(filter && value && sort)) {
-      this.paginate();
-    }
+    const params = queryString.parse(location.search);
+    return params;
+  }
+
+  completeSearchParams(params) {
+    const { pageSize, props: { filter, sort, sortOrder, page, value } } = this;
+    return {
+      filter,
+      sort,
+      sortOrder,
+      page,
+      pageSize,
+      value,
+      ...params,
+    };
+  }
+
+  loadData(params) {
+    const completeParams = this.completeSearchParams(params);
+    this.setQueryParams(params);
+    const { fetchRestaurants } = this.props;
+    fetchRestaurants(completeParams);
   }
 
   render() {
-    const { paginatedResults, sort, sortOrder, filter, value, page, loading } = this.state;
-    const { history } = this.props;
+    const { restaurants, sort, sortOrder, filter, total, page, loading, history, value } = this.props;
     const sortAndFilterFields = [
       { value: 'name', label: 'Name' },
       { value: 'rating', label: 'Rating' },
@@ -187,7 +131,7 @@ class RestaurantsPage extends React.Component {
             { 'restaurants__list-restaurants--loading': loading },
           )}
           >
-            { paginatedResults.map(restaurant => (
+            { restaurants.map(restaurant => (
               <RestaurantInfo
                 key={restaurant.id}
                 onClick={() => (history.push(`/restaurants/${restaurant.id}`))}
@@ -199,11 +143,11 @@ class RestaurantsPage extends React.Component {
               />
             ))}
           </div>
-          { page.total > 1 && (
+          { total > 1 && (
             <Pagination
-              active={page.active}
-              total={page.total}
-              show={page.amount}
+              active={parseInt(page, 10)}
+              total={total}
+              show={this.pageSize}
               onChange={this.onPageChange}
             />
           )}
@@ -216,6 +160,41 @@ class RestaurantsPage extends React.Component {
 RestaurantsPage.propTypes = {
   history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
+  fetchRestaurants: PropTypes.func.isRequired,
+  changeFilter: PropTypes.func.isRequired,
+  restaurants: PropTypes.array,
+  sort: PropTypes.string,
+  sortOrder: PropTypes.string,
+  filter: PropTypes.string,
+  value: PropTypes.string,
+  page: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  total: PropTypes.number,
+  loading: PropTypes.bool,
 };
 
-export default withRouter(RestaurantsPage);
+RestaurantsPage.defaultProps = {
+  restaurants: [],
+  total: 0,
+  sort: '',
+  sortOrder: '',
+  filter: '',
+  value: '',
+  loading: false,
+  page: 1,
+};
+
+const mapStateToProps = state => ({
+  restaurants: state.restaurants,
+  sort: state.sort,
+  sortOrder: state.sortOrder,
+  filter: state.filter,
+  value: state.value,
+  total: state.total,
+  page: state.page,
+  loading: state.loading,
+});
+
+export default connect(mapStateToProps, actions)(withRouter(RestaurantsPage));

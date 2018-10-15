@@ -20,15 +20,14 @@ class Dropdown extends React.Component {
       className, name, title, options, value,
     } = this.props;
     return (
-      <select className={classnames(className, 'dropdown')} name={name} onChange={this.handleChange}>
-        {title && <option value="" disabled selected={!value}>{title}</option>}
+      <select className={classnames(className, 'dropdown')} name={name} value={value} onChange={this.handleChange}>
+        {title && <option value="" disabled>{title}</option>}
         {
           options.map(option => (
             <option
               key={option.value}
               value={option.value}
               disabled={option.disabled}
-              selected={option.value === value}
             >
               {option.label}
             </option>

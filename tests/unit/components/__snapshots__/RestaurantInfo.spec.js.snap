@@ -8,7 +8,7 @@ exports[`RestaurantInfo render clickeable component 1`] = `
       __TITLE__
     </h2>
     <span className='restaurant-info__rating'>
-      __RATING__
+      3
       <small>
          /5
       </small>
@@ -36,7 +36,7 @@ exports[`RestaurantInfo render component 1`] = `
       __TITLE__
     </h2>
     <span className='restaurant-info__rating'>
-      __RATING__
+      3
       <small>
          /5
       </small>
