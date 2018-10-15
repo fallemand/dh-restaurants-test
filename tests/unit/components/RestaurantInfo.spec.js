@@ -5,7 +5,7 @@ describe('RestaurantInfo', () => {
   const props = {
     logo: '__LOGOURI__',
     title: '__TITLE__',
-    rating: '__RATING__',
+    rating: 3,
     location: '__LOCATION__',
     categories: ['__CAT1__', '__CAT2__'],
     className: '__CLASSNAME__',

@@ -51,7 +51,7 @@ Sort.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   field: PropTypes.string,
-  order: PropTypes.bool,
+  order: PropTypes.string,
   fields: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
@@ -60,7 +60,7 @@ Sort.propTypes = {
 
 Sort.defaultProps = {
   className: null,
-  order: false,
+  order: 'false',
   field: '',
 };
 

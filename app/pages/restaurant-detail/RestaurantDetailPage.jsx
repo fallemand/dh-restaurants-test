@@ -1,32 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import RestaurantInfo from '../../components/RestaurantInfo';
 import RestaurantItems from '../../components/RestaurantItems';
-import restaurantsService from '../../services/restaurants.service';
 import './restaurant-detail.scss';
+import actions from '../../flow/actions';
+
 
 class RestaurantDetailPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      info: null,
-    };
-  }
-
   componentWillMount() {
-    const { match } = this.props;
+    const { match, fetchRestaurant } = this.props;
     const { id } = match.params;
-    restaurantsService.restaurantDetail(id).then((data) => {
-      this.setState({
-        info: data,
-      });
-    });
+    fetchRestaurant(id);
   }
 
   render() {
-    const { info } = this.state;
-    const { history } = this.props;
+    const { history, restaurant } = this.props;
     return (
       <div className="restaurant-detail">
         <button
@@ -37,17 +27,17 @@ class RestaurantDetailPage extends React.Component {
           &lt; Back
         </button>
 
-        {info && (
+        {restaurant && (
           <RestaurantInfo
             className="restaurant-detail__info"
-            logo={info.logoUri}
-            title={info.name}
-            rating={info.rating}
-            location={info.location}
-            categories={info.categories}
+            logo={restaurant.logoUri}
+            title={restaurant.name}
+            rating={restaurant.rating}
+            location={restaurant.location}
+            categories={restaurant.categories}
           />
         )}
-        {info && <RestaurantItems sections={info.sections} />}
+        {restaurant && <RestaurantItems sections={restaurant.sections} />}
       </div>
     );
   }
@@ -56,6 +46,16 @@ class RestaurantDetailPage extends React.Component {
 RestaurantDetailPage.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  restaurant: PropTypes.object,
+  fetchRestaurant: PropTypes.func.isRequired,
 };
 
-export default withRouter(RestaurantDetailPage);
+RestaurantDetailPage.defaultProps = {
+  restaurant: null,
+};
+
+const mapStateToProps = state => ({
+  restaurant: state.restaurant,
+});
+
+export default connect(mapStateToProps, actions)(withRouter(RestaurantDetailPage));

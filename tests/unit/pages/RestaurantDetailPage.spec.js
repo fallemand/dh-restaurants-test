@@ -7,21 +7,21 @@ describe('RestaurantsPage', () => {
   const props = {
     history: { goBack: jest.fn() },
     match: { params: { id: 1 } },
-  };
-  const restaurantInfo = {
-    id: 1,
-    logoUri: '__LOGOURI__',
-    name: '__TITLE__',
-    rating: '__RATING__',
-    location: '__LOCATION__',
-    categories: ['__CAT1__', '__CAT2__'],
-    sections: [],
-    className: '__CLASSNAME__',
+    restaurant: {
+      id: 1,
+      logoUri: '__LOGOURI__',
+      name: '__TITLE__',
+      rating: 3,
+      location: '__LOCATION__',
+      categories: ['__CAT1__', '__CAT2__'],
+      sections: [],
+      className: '__CLASSNAME__',
+    },
+    fetchRestaurant: jest.fn(),
   };
 
   it('render component', () => {
     const component = shallow(<RestaurantDetailPage {...props} />);
-    component.setState({ info: restaurantInfo });
     expect(escapeSnapshot(component)).toMatchSnapshot();
   });
 

@@ -7,11 +7,45 @@ exports[`RestaurantsPage render component 1`] = `
   </a>
   <div className='restaurants__list'>
     <div className='restaurants__list-actions'>
-      <Sort name='sort' title='Sort' field='' order={false} className='restaurants__list-sort' onChange={[Function: bound onSortChange]} fields={{...}} />
+      <Sort name='sort' title='Sort' field='' order='' className='restaurants__list-sort' onChange={[Function: bound onSortChange]} fields={{...}} />
       <Filter className='restaurants__list-filter' field='' value='' onFilter={[Function: bound onFilterSubmit]} onChange={[Function: bound onFilterChange]} fields={{...}} />
     </div>
-    <div className='restaurants__list-restaurants restaurants__list-restaurants--loading'>
-      <RestaurantInfo onClick={[Function: onClick]} logo='__LOGOURI__' title='__TITLE__' rating='__RATING__' location='__LOCATION__' categories={{...}} className={{...}} />
+    <div className='restaurants__list-restaurants'>
+      <RestaurantInfo onClick={[Function: onClick]} logo='__LOGOURI__' title='__TITLE__' rating={3} location='__LOCATION__' categories={{...}} className={{...}} />
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`RestaurantsPage render component with filter 1`] = `
+"<div className='restaurants'>
+  <a href='/' className='restaurants__logo'>
+    <img className='restaurants__logo-img' src={{...}} alt='Delivery Hero Logo' />
+  </a>
+  <div className='restaurants__list'>
+    <div className='restaurants__list-actions'>
+      <Sort name='sort' title='Sort' field='' order='' className='restaurants__list-sort' onChange={[Function: bound onSortChange]} fields={{...}} />
+      <Filter className='restaurants__list-filter' field='name' value='__TEST__' onFilter={[Function: bound onFilterSubmit]} onChange={[Function: bound onFilterChange]} fields={{...}} />
+    </div>
+    <div className='restaurants__list-restaurants'>
+      <RestaurantInfo onClick={[Function: onClick]} logo='__LOGOURI__' title='__TITLE__' rating={3} location='__LOCATION__' categories={{...}} className={{...}} />
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`RestaurantsPage render component with sort 1`] = `
+"<div className='restaurants'>
+  <a href='/' className='restaurants__logo'>
+    <img className='restaurants__logo-img' src={{...}} alt='Delivery Hero Logo' />
+  </a>
+  <div className='restaurants__list'>
+    <div className='restaurants__list-actions'>
+      <Sort name='sort' title='Sort' field='name' order='false' className='restaurants__list-sort' onChange={[Function: bound onSortChange]} fields={{...}} />
+      <Filter className='restaurants__list-filter' field='' value='' onFilter={[Function: bound onFilterSubmit]} onChange={[Function: bound onFilterChange]} fields={{...}} />
+    </div>
+    <div className='restaurants__list-restaurants'>
+      <RestaurantInfo onClick={[Function: onClick]} logo='__LOGOURI__' title='__TITLE__' rating={3} location='__LOCATION__' categories={{...}} className={{...}} />
     </div>
   </div>
 </div>"

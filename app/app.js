@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import {
   HashRouter as Router, Route, Switch, Redirect,
 } from 'react-router-dom';
@@ -9,6 +10,7 @@ import RestaurantDetailPage from './pages/restaurant-detail/RestaurantDetailPage
 import NotFoundPage from './pages/not-found/NotFoundPage';
 import ErrorPage from './pages/error/ErrorPage';
 import authService from './services/auth.service';
+import store from './flow/store';
 import './styles/_common.scss';
 
 /**
@@ -16,20 +18,19 @@ import './styles/_common.scss';
  * If can't get token, show error page
  */
 authService()
-  .then((token) => {
-    // Save token
-    window.sessionStorage.setItem('token', token);
-
+  .then(() => {
     // Render SPA
     render((
-      <Router>
-        <Switch>
-          <Route exact path="/restaurants/:id" component={RestaurantDetailPage} />
-          <Route exact path="/restaurants" component={RestaurantsPage} />
-          <Route exact path="/" render={() => <Redirect to="/restaurants" />} />
-          <Route component={NotFoundPage} />
-        </Switch>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route exact path="/restaurants/:id" component={RestaurantDetailPage} />
+            <Route exact path="/restaurants" component={RestaurantsPage} />
+            <Route exact path="/" render={() => <Redirect to="/restaurants" />} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </Router>
+      </Provider>
     ), document.getElementById('root-app'));
   })
   .catch(() => {
