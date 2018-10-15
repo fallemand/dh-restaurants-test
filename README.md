@@ -29,8 +29,6 @@ I filter them in the Api and keep only the first one.
 - Handle incorrect Ids in the App.
 - Add WAI-ARIA markup
 - Deploy in demo server and provide public url.
-- Add Redux for state handling.  
-- Functional testing with Nightwatch
 - Generate different bundles in development (with sourcemaps, not minified, etc).
 
 ---
@@ -60,10 +58,25 @@ npm run start:dev
 npm run watch
 ```
 
-### Run Tests
+---
+
+### Unit Tests
 ```
-npm run test
+npm run test:unit
 ```
+
+### Functional Tests
+#### 1) Run the app
+```
+npm run start:test
+```
+#### 2) In another terminal run the tests
+**Attention:** This required JAVA 8 installed with `JAVA_HOME` set
+```
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+npm run test:e2e
+```
+
 ---
 
 ### Author
