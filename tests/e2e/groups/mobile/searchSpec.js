@@ -1,5 +1,5 @@
 module.exports = {
-  'Should filter with game name': (client) => {
+  'Should filter with restaurant name': (client) => {
     const searchPage = client.page.SearchPage();
     searchPage
       .filter('Indian Curry', client)
@@ -9,7 +9,7 @@ module.exports = {
       searchPage.expect.element('@restaurantsFirstChildTitle').text.to.equal('Indian Curry');
     });
   },
-  'Should sort games RATING': (client) => {
+  'Should sort restaurants RATING': (client) => {
     const searchPage = client.page.SearchPage();
     searchPage
       .sortByRating()
